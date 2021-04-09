@@ -1,6 +1,8 @@
 # Links Rustler
 *Prepares and presents them tasty links just the way you like*
 
+<img width="30%" align="left" src="https://github.com/therden/links-rustler/blob/main/stack.png">
+
 <img width="30%" align="right" src="https://github.com/therden/links-rustler/blob/main/logo.png">
 
 Some websites have assets (web pages, image, video, sound, or text files)
