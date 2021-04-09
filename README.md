@@ -1,9 +1,7 @@
 # Links Rustler
 *Prepares and presents them tasty links just the way you like*
 
-<img width="30%" align="left" src="https://github.com/therden/links-rustler/blob/main/stack.png">
-
-<img width="30%" align="right" src="https://github.com/therden/links-rustler/blob/main/logo.png">
+<img width="30%" align="right" src="https://github.com/therden/links-rustler/blob/main/stack.png">
 
 Some websites have assets (web pages, image, video, sound, or text files)
 which are named named using numeric sequences and/or are stored in directory structures which are named that way.  
@@ -14,6 +12,7 @@ links to a subset of those resources that  you've defined.
 
 That's where `Links Rustler` comes in.
 
+<img width="30%" align="left" src="https://github.com/therden/links-rustler/blob/main/logo.png">
 
 
 Original image of [Sausages by Jacob Halton from the Noun Project](https://thenounproject.com/term/sausage/4135/)
