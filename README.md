@@ -1,7 +1,8 @@
 # Links Rustler
-*Prepares and presents them tasty links just the way you like*
 
-<img width="40%" align="right" src="https://github.com/therden/links-rustler/blob/main/combined.png">
+<img width="45%" align="right" src="https://github.com/therden/links-rustler/blob/main/combined.png">
+
+*Prepares and presents them tasty links just the way you like*
 
 Some websites have assets (web pages, image, video, sound, or text files)
 which are named named using numeric sequences and/or are stored in directory structures which are named that way.  
