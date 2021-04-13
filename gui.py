@@ -1,10 +1,34 @@
+import multiprocessing, random
+
 import PySimpleGUI as sg
+
+from slr import rustle_up_some_links as do_it
+
 
 # Define the window's contents
 window_title = "Sequential Links Rustler"
 
-left_buttons = [[sg.Button("1")], [sg.Button("2")], [sg.Button("3")]]
-# left_layout = sg.Column(left_buttons)
+logo_image = sg.Image(
+    filename="logo.png",
+    data=None,
+    background_color=None,
+    size=(120, 136),
+    pad=None,
+    key="logo",
+    tooltip=None,
+    right_click_menu=None,
+    visible=True,
+    enable_events=False,
+    metadata=None,
+)
+
+left_buttons = [
+    [logo_image],
+    [sg.Text("")],
+    [sg.Text("")],
+    # [sg.Button("2")],
+    # [sg.Button("3")],
+]
 
 # resource_frame = [
 #     [sg.Text("Enter/paste original URL:"), sg.Input(key="-Resource-")],
@@ -21,35 +45,26 @@ left_buttons = [[sg.Button("1")], [sg.Button("2")], [sg.Button("3")]]
 layout = [
     [
         sg.Column(left_buttons,),
-        # ],
-        # [
         sg.Column(
             [
-                [sg.Text("Enter/paste original URL:"), sg.Input(key="-Resource-")],
-                [sg.Text("Edit URL mask:"), sg.Input(key="-ResourceMask-")],
-                [sg.Text("Enter/paste original URL:"), sg.Input(key="-Thumbnail-")],
-                [sg.Text("Edit URL mask:"), sg.Input(key="-ThumbnailMask-")],
+                # [sg.Text("Enter/paste original URL:"), sg.Input(key="-Resource-")],
+                # [sg.Button("Copy above URL below")],
+                [sg.Text("Edit URL mask:"), sg.Input(key="-URLMask-", size=(65, 1)),],
+                # [sg.Text("Enter/paste original URL:"), sg.Input(key="-Thumbnail-")],
+                # [sg.Text("Edit URL mask:"), sg.Input(key="-ThumbnailMask-")],
+                [sg.Text("")],
+                [sg.Text("")],
+                [sg.Text("")],
+                [sg.Text("")],
+                [sg.Text("")],
+                [
+                    sg.Button("Generate, Save, and Open File", key="-DoIt-"),
+                    sg.Button("Quit"),
+                ],
             ]
         ),
     ],
-    # [
-    #     sg.Column(
-    #         [
-    #             [sg.Frame("Resource", resource_frame)],
-    #             [sg.Frame("Thumbnail", thumbnail_frame)],
-    #         ]
-    #     ),
-    # ],
-    # [sg.Text("Paste URL for resource here")],
-    # [sg.Input(key="-Resource-")],
-    # [sg.Text("Edit URL mask for resource here:")],
-    # [sg.Input(key="-ResourceMask-")],
-    # [sg.Text("Paste original URL for thumbnail here")],
-    # [sg.Input(key="-Thumbnail-")],
-    # [sg.Text("Edit URL mask for thumbnail here:")],
-    # [sg.Input(key="-ThumbnailMask-")],
-    # [sg.Text(size=(40, 1), key="-OUTPUT-")],
-    [sg.Button("Generate, Save, and Open File"), sg.Button("Quit")],
+    # [sg.Button("Generate, Save, and Open File"), sg.Button("Quit")],
 ]
 
 # Create the window
@@ -61,12 +76,16 @@ while True:
     # See if user wants to quit or window was closed
     if event == sg.WINDOW_CLOSED or event == "Quit":
         break
+    elif event == "-DoIt-":
+        proc_id = "slr_" + str(int(random.random() * 1000000000000))
+        d = multiprocessing.Process(
+            name=proc_id, target=do_it(values["-URLMask-"], targetfile="rustled.html"),
+        )
+        d.daemon = True
+        d.start()
+        # do_it(values["-URLMask-"], targetfile="rustled.html")
     else:
         print(event, values)
-    # # Output a message to the window
-    # window["-OUTPUT-"].update(
-    #     "Hello " + values["-INPUT-"] + "! Thanks for trying PySimpleGUI"
-    # )
 
 # Finish up by removing from the screen
 window.close()
