@@ -4,13 +4,12 @@
 
 *Prepares and presents them tasty links just the way you like*
 
-Some websites have pages which contain links to assets (other web pages, or
-image, video, sound, or text files) that are named and/or stored in directories
-that are named using numeric sequences.
+Website pages sometimes contain links -- other web pages, or image, video,
+sound, or text files -- for which the files and/or directories are named using
+numeric sequences.
 
-When navigating to those resources through those websites' pages feels like a
-slog, you might find yourself wishing you could generate your own HTML page with
-links to a selected subset of those resources.
+When the design or organization of those pages makes accessing those resources a
+chore, you might want to generate your own HTML page with links to a selected subset of those resources.
 
 That's where `Sequential Links Rustler` comes in.
 
@@ -26,6 +25,4 @@ Credits
 -------
 Thanks to [MikeTheWatchGuy](https://github.com/MikeTheWatchGuy) for creating and maintaining [PySimpleGUI](https://github.com/PySimpleGUI/PySimpleGUI).
 
-Thanks also to [The Pallets Project](https://github.com/pallets) for creating and maintaining [Click (the "Command Line Interface Creation Kit")](https://github.com/pallets/click).
-
-Original SVG image of three black [Sausages by Jacob Halton from the Noun Project](https://thenounproject.com/term/sausage/4135/)
+The source of the three black sausages incorporated into the image of the Rustler was the SVG at the following link: [Sausage by Jacob Halton from the Noun Project](https://thenounproject.com/term/sausage/4135/)
