@@ -145,7 +145,7 @@ def get_HTML_file(URL_mask, targetfile=None, hide_missing=False):
     for link in get_URL_list_generator(URL_mask):
         body += f'<a href="{link}">'
         body += f'<img src="{link}"></a>\n'
-    bottom = f"<br><i>{credit}</i>\n{javascript}\n</BODY>\n</HTML>"
+    bottom = f"<br>\n<i>{credit}</i>\n{javascript}\n</BODY>\n</HTML>"
     targetfile = "links.html" if targetfile == None else targetfile
     f = open(targetfile, "w")
     f.write(top + body + bottom)
@@ -154,19 +154,23 @@ def get_HTML_file(URL_mask, targetfile=None, hide_missing=False):
     return targetfile
 
 
-def open_file_in_firefox(URL):
+# def open_file_in_firefox(URL):
+#     """The name says it all."""
+#     webbrowser.register("firefox", None, webbrowser.GenericBrowser("firefox"))
+#     ff = webbrowser.get("firefox")
+#     ff.open_new_tab(URL)
+
+
+def open_file_in_default_browser(URL):
     """The name says it all."""
-    webbrowser.register("firefox", None, webbrowser.GenericBrowser("firefox"))
-    ff = webbrowser.get("firefox")
-    ff.open_new_tab(URL)
+    wb = webbrowser.get()
+    wb.open_new_tab(URL)
 
 
-def make_and_open_HTML_file_from_URL_mask(
-    URL_mask, targetfile=None, hide_missing=False
-):
+def make_and_open_HTML_file_from_URL_mask(URL_mask, targetfile=None, hide_missing=True):
     """Again: the name says it all.  Uses the functions defined above."""
     URL = get_HTML_file(URL_mask, targetfile=targetfile, hide_missing=hide_missing)
-    open_file_in_firefox(URL)
+    open_file_in_default_browser(URL)
 
 
 rustle_up_some_links = make_and_open_HTML_file_from_URL_mask

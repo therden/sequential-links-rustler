@@ -2,7 +2,7 @@ import multiprocessing, random
 
 import PySimpleGUI as sg
 
-from slr import rustle_up_some_links as do_it
+from main import rustle_up_some_links as do_it
 
 
 # Define the window's contents
@@ -49,7 +49,11 @@ layout = [
             [
                 # [sg.Text("Enter/paste original URL:"), sg.Input(key="-Resource-")],
                 # [sg.Button("Copy above URL below")],
-                [sg.Text("Edit URL mask:"), sg.Input(key="-URLMask-", size=(65, 1)),],
+                [
+                    sg.Text("Enter and edit URL mask:"),
+                    sg.Input(key="-URLMask-", size=(65, 1)),
+                    sg.Button("Clear", key="-Clear URL mask-"),
+                ],
                 # [sg.Text("Enter/paste original URL:"), sg.Input(key="-Thumbnail-")],
                 # [sg.Text("Edit URL mask:"), sg.Input(key="-ThumbnailMask-")],
                 [sg.Text("")],
@@ -57,10 +61,7 @@ layout = [
                 [sg.Text("")],
                 [sg.Text("")],
                 [sg.Text("")],
-                [
-                    sg.Button("Generate, Save, and Open File", key="-DoIt-"),
-                    sg.Button("Quit"),
-                ],
+                [sg.Button("Rustle Up Some Links", key="-DoIt-"), sg.Button("Quit"),],
             ]
         ),
     ],
@@ -84,6 +85,8 @@ while True:
         d.daemon = True
         d.start()
         # do_it(values["-URLMask-"], targetfile="rustled.html")
+    elif event == "-Clear URL mask-":
+        window["-URLMask-"].update("")
     else:
         print(event, values)
 
