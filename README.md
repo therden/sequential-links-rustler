@@ -20,11 +20,14 @@ Getting Started
 1.  Clone this repository, or download and extract [this zip file](https://github.com/therden/sequential-links-rustler/archive/refs/heads/main.zip)
 2.  Change to the directory containing these files
 3.  Run `python slr.py` or `python3 slr.py`
-4.  In the GUI, fill in the URL mask (examples below, and more [here](`https://therden.github.io/sequential-links-rustler/)), set options, and click the button labeled _Rustle Up Some Links _, and wait for your new web page to load.
+4.  In the GUI, fill in the URL mask (see examples below<!--, and more [here](`https://therden.github.io/sequential-links-rustler/-->) and click the button labeled _Rustle Up Some Links_, <!--set any desired options,--> then sit back and wait (not long!) for your new web page to load.
 
-`Sequential Links Rustler` takes a "URL mask" -- which is really just a URL with one or more "range definitions" -- and generates an HTML page with links to the set of resources that were specified, opening it in a new tab withing the browser you've selected.
 
-"Range definitions" are contained within curly brackets, and consist (at a minimum) of a Start integer and a Stop integer separate by a hyphen.  (If desired, those elements may be followed by a semi-colon and a Stride value, which may be a positive or negative integer value.  If no Stride is specified, a positive value of 1 will be assumed.)
+Basic Usage
+-----------
+`Sequential Links Rustler` takes a __"URL mask"__ -- which is really just a URL with one or more "range definitions" -- and generates an HTML page with links to the set of resources that were specified, opening it in a new tab withing the browser you've selected.
+
+__"Range definitions"__ are contained within curly brackets, and consist (at a minimum) of a Start integer and a Stop integer separate by a hyphen.  (If desired, those elements may be followed by a semi-colon and a Stride value, which may be a positive or negative integer value.  If no Stride is specified, a positive value of 1 will be assumed.)
 
 For example: the URL mask<br>
 `https://therden.github.io/sequential-links-rustler/images/sausage{0-20}.jpeg`<br>
@@ -33,9 +36,8 @@ contains the range definition `{0-20}` and produces and loads an HTML page that 
 <img width="90%" align="left" src="assets/Links_screenshot.png">
 
 
-
 Features
---------------
+--------
 The range definition shown above generated a sequence of links that were incremented by one; but `Sequential Links Rustler` is flexible.  In addition to that default behavior, it supports
 - sequences with gaps > 1 between values (aka 'skipping' integers.)
     - the range definition `{0-7;2}` will produce links with the values `0, 2, 4, 6`
@@ -49,6 +51,13 @@ The range definition shown above generated a sequence of links that were increme
 - multiple range definitions within a single URL mask
     - copy the following into `Sequential Links Rustler` and hover over the images in order to see how the three range definitions are processed recursively, left-to-right.
     `https://therden.github.io/sequential-links-rustler/levels/gallery{01-03;1}/set{1-2;1}/thumbnail_{3-0;-1}.jpeg`
+
+Other example URL-masks
+-----------------------
+- `https://therden.github.io/sequential-links-rustler/png_numbers/{5-0;-1}.png`
+<!--- `https://evolution.voxeo.com/library/audio/prompts/numbers/{0-10;1}.wav`-->
+- `https://therden.github.io/sequential-links-rustler/png_numbers/{100-120;4}.html`
+- `http://vision.stanford.edu/aditya86/ImageNetDogs/thumbnails/n02098286-West_Highland_white_terrier/n02098286_{1009-1983;1}.jpg`
 
 ToDo
 ----
@@ -66,6 +75,11 @@ Credits
 -------
 Thanks to [MikeTheWatchGuy](https://github.com/MikeTheWatchGuy) for creating and maintaining [PySimpleGUI](https://github.com/PySimpleGUI/PySimpleGUI).
 
-The source of the three black sausages incorporated into the image of the Rustler was the SVG at [Sausage by Jacob Halton from the Noun Project](https://thenounproject.com/term/sausage/4135/)
+And also to Quinn for his encouragement (constructive criticism to come?)
 
+The source of the three black sausages incorporated into the image of "the Rustler" was the SVG at [Sausage by Jacob Halton from the Noun Project](https://thenounproject.com/term/sausage/4135/)
+
+
+<!--
 WAV files for 'Countdown' example from Evolution/Voxeo's [open source (LPGL) 'Numbers' audio prompts library in open source (LPGL) tools library](https://evolution.voxeo.com/library/audio/prompts/)
+-->
