@@ -14,6 +14,9 @@ subset of those resources.
 
 That's where `Sequential Links Rustler` comes in.
 
+<figure>
+<img width="90%" align="center" src="assets/SLR_screenshot.png">
+</figure>
 
 Getting Started
 ---------------
@@ -33,7 +36,9 @@ For example: the URL mask<br>
 `https://therden.github.io/sequential-links-rustler/images/sausage{0-20}.jpeg`<br>
 contains the range definition `{0-20}` and produces and loads an HTML page that looks like
 
-<img width="90%" align="left" src="assets/Links_screenshot.png">
+<figure>
+<img width="90%" align="center" src="assets/Links_screenshot.png">
+</figure>
 
 
 Features
