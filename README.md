@@ -12,11 +12,10 @@ When the design or organization of those pages makes accessing those resources a
 chore, you might want to generate your own HTML page with links to a selected
 subset of those resources.
 
-That's where `Sequential Links Rustler` comes in.
+<img width="125px" align="right" src="logo.png">
 
-<figure>
-<img width="90%" align="center" src="assets/SLR_screenshot.png">
-</figure>
+That's where `Sequential Links Rustler` comes in. 
+
 
 Getting Started
 ---------------
@@ -25,6 +24,9 @@ Getting Started
 3.  Run `python slr.py` or `python3 slr.py`
 4.  In the GUI, fill in the URL mask (see examples below<!--, and more [here](`https://therden.github.io/sequential-links-rustler/-->) and click the button labeled _Rustle Up Some Links_, <!--set any desired options,--> then sit back and wait (not long!) for your new web page to load.
 
+<figure>
+<img width="90%" align="center" src="assets/SLR_screenshot.png">
+</figure>
 
 Basic Usage
 -----------
