@@ -12,9 +12,7 @@ When the design or organization of those pages makes accessing those resources a
 chore, you might want to generate your own HTML page with links to a selected
 subset of those resources.
 
-<img width="125px" align="right" src="logo.png">
-
-That's where `Sequential Links Rustler` comes in. 
+That's where `Sequential Links Rustler` comes in.
 
 
 Getting Started
@@ -80,6 +78,8 @@ __Buy Me a Coffee__ is a great way to publicly support creators.  It's quick, ea
 
 Credits
 -------
+<img width="125px" align="right" src="logo.png">
+
 Thanks to [MikeTheWatchGuy](https://github.com/MikeTheWatchGuy) for creating and maintaining [PySimpleGUI](https://github.com/PySimpleGUI/PySimpleGUI).
 
 And also to Quinn for his encouragement (constructive criticism to come?)
