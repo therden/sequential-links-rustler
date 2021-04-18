@@ -22,7 +22,7 @@ Getting Started
 2.  Change to the directory containing these files
 3.  Run `python slr.py` or `python3 slr.py`
 4.  In the resulting GUI dialog
-    - fill in the URL mask (see examples below, and [here](`https://therden.github.io/sequential-links-rustler/-->) ),
+    - fill in the URL mask -- see examples below, and [here](`https://therden.github.io/sequential-links-rustler/-->),
     <!-- - set any desired options,-->
     - click _Rustle Up Some Links_, and then <br>
     - sit back and wait (not long!) for your new web page to load.
