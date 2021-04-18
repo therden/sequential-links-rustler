@@ -60,32 +60,52 @@ Between the *Stop* value and the closing curly bracket, just insert a semi-colon
 | {9-0;3}          | 9, 6, 3, 0             |
 
 
-Other Features
+Other Features supported by __Sequential Links Rustler__
 ---------------
+- #### declining sequences
+
+    Within the range definition, make *Start* the larger and *Stop* the smaller value.
+
+    For example:  changing the range definition in the above example to `{20-0}` will generate the same page, but the images will display in reverse order.
+
+- #### control spacing between generated values
+
+    Between the *Stop* value and the closing curly bracket, insert a semi-colon and an integer representing the distance between consecutive values.
+
+    | range definition | set of values produced |
+    | ---------------- | ---------------------- |
+    | {0-9;2}          | 0, 2, 4, 6, 8          |
+    | {0-9;3}          | 0, 3, 6, 9             |
+    | {9-0;2}          | 9, 7, 5, 3, 1          |
+    | {9-0;3}          | 9, 6, 3, 0             |
+
+
 - zero padding
 
-    | range_definition | sequence                |
+    When a website's mumeric values include leading zeros, just include those in your range definition.  Examples:
+
+    | range_definition | produces sequence       |
     | ---------------- | ----------------------- |
-    | {01-20;5}        | 01, 06, 11, 15          |
+    | {01-20;5}        | 01, 06, 11, 16          |
     | {020-001; 4}     | 020, 016, 012, 008, 004 |
 
-- multiple range definitions within a __URL mask__
+- multiple range definitions within a URL mask
 
   For example: given the (partial), 3-level URL_mask `set{1-2}/subset{11-12}/pic{0-2}.jpg`, __Sequential Links Rustler__
   will produce the following (partial) link sequence
 
-  set1/subset11/pic0.jpg<br>
-  set1/subset11/pic1.jpg<br>
-  set1/subset11/pic2.jpg<br>
-  set1/subset12/pic0.jpg<br>
-  set1/subset12/pic1.jpg<br>
-  set1/subset12/pic2.jpg<br>
-  set2/subset11/pic0.jpg<br>
-  set2/subset11/pic1.jpg<br>
-  set2/subset11/pic2.jpg<br>
-  set2/subset12/pic0.jpg<br>
-  set2/subset12/pic1.jpg<br>
-  set2/subset12/pic2.jpg<br>
+  foo1/bar11/pic0.jpeg<br>
+  foo1/bar11/pic1.jpeg<br>
+  foo1/bar11/pic2.jpeg<br>
+  foo1/bar12/pic0.jpeg<br>
+  foo1/bar12/pic1.jpeg<br>
+  foo1/bar12/pic2.jpeg<br>
+  foo2/bar11/pic0.jpeg<br>
+  foo2/bar11/pic1.jpeg<br>
+  foo2/bar11/pic2.jpeg<br>
+  foo2/bar12/pic0.jpeg<br>
+  foo2/bar12/pic1.jpeg<br>
+  foo2/bar12/pic2.jpeg<br>
 
 For more example URL masks and additional information about __Sequential Links Rustler__, see [the GitHub pages associated with this project](https://therden.github.io/sequential-links-rustler/).
 
