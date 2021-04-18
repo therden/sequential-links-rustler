@@ -7,9 +7,7 @@ Some directories and image files are saved under `\docs` and will be used to ill
 Experiment: Embed javascript to copy example URL_mask
 ----
 
-<button onclick="copyEx1()">Copy</button>
-
-<input type="text" width="90%" value="https://therden.github.io/sequential-links-rustler/png_numbers/{5-0;-1}.png"  id="Ex1">
+<button onclick="copyEx1()">Copy</button><input type="text" size="60ch" value="https://therden.github.io/sequential-links-rustler/png_numbers/{5-0;-1}.png" id="Ex1">
 
 <script>
 function copyEx1() {
