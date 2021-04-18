@@ -44,12 +44,11 @@ def extract_range_definitions(URL_mask):
             start, end = span.split("-")
             start, end = int(start), int(end)
         else:
+            stride = 1
             start, end = range_defs[each].split("-")
             start, end = int(start), int(end)
-            if start < end:
-                stride = 1
-            elif start > end:
-                stride = -1
+        if start > end:
+            stride = -stride
         endshift = 1 if stride > 0 else -1
         end += endshift
         range_defs[each] = (start, end, stride)

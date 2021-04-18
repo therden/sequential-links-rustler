@@ -28,9 +28,13 @@ Getting Started
 
 Basic Usage
 -----------
-`Sequential Links Rustler` takes a __"URL mask"__ -- which is really just a URL with one or more "range definitions" -- and generates an HTML page with links to the set of resources that were specified, opening it in a new tab withing the browser you've selected.
+`Sequential Links Rustler` takes a __"URL mask"__ containing at least one __"range definition"__ and generates an HTML page with links to the set of resources that were specified, opening it in a new browser tab.
 
-__"Range definitions"__ are contained within curly brackets, and consist (at a minimum) of a Start integer and a Stop integer separate by a hyphen.  (If desired, those elements may be followed by a semi-colon and a Stride value, which may be a positive or negative integer value.  If no Stride is specified, a positive value of 1 will be assumed.)
+A __URL mask__ is just a standard URL, except that in one or more portions a numeric value has been replaced by __range definition__.
+
+A __range definition__ is written within curly brackets, and at a minimum consists of a Start integer and a Stop integer separated by a hyphen.  `Sequential Links Rustler` calculates the set of values described by the __range definition__ and then generates a series of links, each of which replaces the __range definition__ with the next value in the set.
+
+If the Stop value is larger than the Start value then, by default, the value inserted into each generated link be one greater than the last.
 
 For example: the URL mask<br>
 `https://therden.github.io/sequential-links-rustler/images/sausage{0-20}.jpeg`<br>
@@ -40,16 +44,24 @@ contains the range definition `{0-20}` and produces and loads an HTML page that 
 <img width="90%" align="center" src="assets/Links_screenshot.png">
 </figure>
 
+If the Stop value is smaller than the Start value, then the value inserted in each link will be one less than the last.  So the mask <br>
+`https://therden.github.io/sequential-links-rustler/images/sausage{20-0}.jpeg`<br> will generate the same page as is shown above, but with the images in reverse order.
 
-Features
---------
-The range definition shown above generated a sequence of links that were incremented by one; but `Sequential Links Rustler` is flexible.  In addition to that default behavior, it supports
-- sequences with gaps > 1 between values (aka 'skipping' integers.)
-    - the range definition `{0-7;2}` will produce links with the values `0, 2, 4, 6`
-    - the range definition `{0-7;3}` will produce links with the values `0, 3, 6`    
-- sequences with values declining by one or more integers
-    - the range definition `{7-0;-2}` will produce links with the values `7, 5, 3, 1`
-    - the range definition `{7-0;-3}` will produce links with the values `7, 4, 1`    
+These +1 or -1 values are referred to as the __range definition__'s "stride" -- the distance between one value and the next.  
+
+`Sequential Links Rustler` supports "strides" longer than 1.  When desired, these are specified within the __range definition__ by following the Stop value with a semi-colon and an integer representing the desired "stride".  (It will be interpreted as positive or negative depending on the Stop and Start values in the __range definition__.)
+
+| range definition | set of values produced |
+| ---------------- | ---------------------- |
+| {0-9; 2} | 0, 2, 4, 6, 8 |
+| {0-9; 3} | 0, 3, 6, 9 |
+| {9-0; 2} | 9, 7, 5, 3, 1 |
+| {9-0; 3} | 9, 6, 3, 0 |
+
+
+Other Features
+---------------
+
 - zero padding
     - the range definition `{01-10;1}` will produce links with the values `01, 02, 03, 04, 05, 06, 07, 08, 09, 10`
     the range definition `{001-010}` will produce links with the values `001, 002, 003, 004, 005, 006, 007, 008, 009, 010`
