@@ -66,7 +66,7 @@ Other Features supported by __Sequential Links Rustler__
 
 - #### zero padding
 
-    When a website's mumeric values include leading zeros, just include those in your sequence definition.  Examples:
+    When a website's numeric values include leading zeros, just include those in your sequence definition.  Examples:
 
     | sequence_definition | produces sequence       |
     | ---------------- | ----------------------- |
@@ -103,7 +103,7 @@ For more example URL masks and additional information about __Sequential Links R
 
 ToDo
 ----
-Bugs, ideas for improvements and new features are tracked in [Issues](https://github.com/therden/sequential-links-rustler/issues) -- feel free to share your thoughts there.
+I track bugs and ideas for improvements and new features in [Issues](https://github.com/therden/sequential-links-rustler/issues) -- feel free to contribute your thoughts there.
 
 Speaking of contributions
 -------------------------
