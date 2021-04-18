@@ -20,7 +20,7 @@ Getting Started
 1.  Clone this repository, or download and extract [this zip file](https://github.com/therden/sequential-links-rustler/archive/refs/heads/main.zip)
 2.  Change to the directory containing these files
 3.  Run `python slr.py` or `python3 slr.py`
-4.  In the GUI, fill in the URL mask (see examples below,<!--, and more [here](`https://therden.github.io/sequential-links-rustler/-->) then click the button labeled _Rustle Up Some Links_, <!--set any desired options,--> then sit back and wait (not long!) for your new web page to load.
+4.  In the GUI, fill in the URL mask (see examples below, and [here](`https://therden.github.io/sequential-links-rustler/-->), <!--set any desired options,--> click the _Rustle Up Some Links_ button, then sit back and wait (not long!) for your new web page to load.
 
 <figure>
 <img width="90%" align="center" src="assets/SLR_screenshot.png">
@@ -34,7 +34,7 @@ A __URL mask__ is just like a standard URL, except that a __range definition__ h
 
 A minimal __range definition__ consists of a *Start* integer and a *Stop* integer, separated by a hyphen and surrounded by curly brackets.  __Sequential Links Rustler__ generates a series of links, each matching the __URL mask__, with the __range definition__ replaced by the next sequential value it defines.
 
-For example: the URL mask
+For example, the URL mask
 
 `https://therden.github.io/sequential-links-rustler/images/sausage{0-20}.jpeg`
 
@@ -44,9 +44,13 @@ includes the range definition `{0-20}`, and from it __Sequential Links Rustler__
 <img width="90%" align="center" src="assets/Links_screenshot.png">
 </figure>
 
-__Sequential Links Rustler__ also supports sequences wit declining values. Changing the __range definition__ in the above example to `{20-0}` will generate the same page, but with the order of the images reversed.
+__Sequential Links Rustler__ also supports sequences with declining values.
 
-__Sequential Links Rustler__ can generate sequences in which successive values differ by more than 1.  Between the *Stop* value and the closing curly bracket, just insert a semi-colon and an integer representing the desired difference between consecutive values.
+Changing the __range definition__ in the above example to `{20-0}` will generate the same page, but with the order of the images reversed.
+
+__Sequential Links Rustler__ can generate sequences in which successive values differ by more than 1.  
+
+Between the *Stop* value and the closing curly bracket, just insert a semi-colon and an integer representing the desired difference between consecutive values.
 
 | range definition | set of values produced |
 | ---------------- | ---------------------- |
@@ -87,7 +91,7 @@ For more example URL masks and additional information about __Sequential Links R
 
 ToDo
 ----
-I'm tracking my ideas for improvements, new features, and bugs in this repo's [Issues](https://github.com/therden/sequential-links-rustler/issues) -- feel free to share your input there.
+Bugs, ideas for improvements and new features are tracked in [Issues](https://github.com/therden/sequential-links-rustler/issues) -- feel free to share your thoughts there.
 
 Speaking of contributions
 -------------------------
@@ -95,7 +99,7 @@ It isn't required (of course), but if you find this project useful and are so mo
 
 <a href="https://www.buymeacoffee.com/tomherden" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" alt="Buy Me A Coffee" width="217px" ></a>
 
-__Buy Me a Coffee__ is a great way to publicly support creators.  It's quick, easy, and your contribution is recorded so that others can see that you've made a contribution.  (You can choose to make your donation private if you prefer.)
+__Buy Me a Coffee__ is a great way to publicly support creators.  It's quick, easy, and your contribution is recorded and made visible.  (You _can_ choose to make your donation private if you prefer.)
 
 Credits
 -------
