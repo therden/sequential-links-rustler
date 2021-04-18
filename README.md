@@ -80,7 +80,7 @@ Other Features supported by __Sequential Links Rustler__
     | {9-0;3}          | 9, 6, 3, 0             |
 
 
-- zero padding
+- #### zero padding
 
     When a website's mumeric values include leading zeros, just include those in your range definition.  Examples:
 
@@ -89,7 +89,7 @@ Other Features supported by __Sequential Links Rustler__
     | {01-20;5}        | 01, 06, 11, 16          |
     | {020-001; 4}     | 020, 016, 012, 008, 004 |
 
-- multiple range definitions within a URL mask
+- #### multiple range definitions within a URL mask
 
   For example: given the (partial), 3-level URL_mask `set{1-2}/subset{11-12}/pic{0-2}.jpg`, __Sequential Links Rustler__
   will produce the following (partial) link sequence
@@ -106,6 +106,14 @@ Other Features supported by __Sequential Links Rustler__
   foo2/bar12/pic0.jpeg<br>
   foo2/bar12/pic1.jpeg<br>
   foo2/bar12/pic2.jpeg<br>
+<!---
+- #### Choose whether to show or hide links that point to inaccessible resources
+- #### Choose the location where the generated HTML file will be saved
+- #### Choose name of the generated HTML file that's generated
+- #### Choose the browser in which to open the generated HTML file
+- #### Choose the maximum width of the images displayed in pixels or % of page
+- #### Specify a separate URL mask for thumbnail images from full-size images
+--->
 
 For more example URL masks and additional information about __Sequential Links Rustler__, see [the GitHub pages associated with this project](https://therden.github.io/sequential-links-rustler/).
 
