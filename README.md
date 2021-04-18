@@ -30,49 +30,33 @@ Basic Usage
 -----------
 __Sequential Links Rustler__ accepts a __"URL mask"__ and generates an HTML page with links to the set of resources that were specified, opening the resulting file in a new browser tab.
 
-A __URL mask__ is just like a standard URL, except that a __range definition__ has been substituted in place of a numeric value.
+A __URL mask__ is just like a standard URL, except that a __sequence definition__ has been substituted in place of a numeric value.
 
-A minimal __range definition__ consists of a *Start* integer and a *Stop* integer, separated by a hyphen and surrounded by curly brackets.  __Sequential Links Rustler__ generates a series of links, each matching the __URL mask__, with the __range definition__ replaced by the next sequential value it defines.
+A minimal __sequence definition__ consists of a *Start* integer and a *Stop* integer, separated by a hyphen and surrounded by curly brackets.  __Sequential Links Rustler__ generates a series of links, each matching the __URL mask__, with the __sequence definition__ replaced by the next sequential value it defines.
 
 For example, the URL mask
 
 `https://therden.github.io/sequential-links-rustler/images/sausage{0-20}.jpeg`
 
-includes the range definition `{0-20}`, and from it __Sequential Links Rustler__ will produce and load an HTML page that looks like
+includes the sequence definition `{0-20}`, and from it __Sequential Links Rustler__ will produce and load an HTML page that looks like
 
 <figure>
 <img width="90%" align="center" src="assets/Links_screenshot.png">
 </figure>
 
-__Sequential Links Rustler__ also supports sequences with declining values.
-
-Changing the __range definition__ in the above example to `{20-0}` will generate the same page, but with the order of the images reversed.
-
-__Sequential Links Rustler__ can generate sequences in which successive values differ by more than 1.  
-
-Between the *Stop* value and the closing curly bracket, just insert a semi-colon and an integer representing the desired difference between consecutive values.
-
-| range definition | set of values produced |
-| ---------------- | ---------------------- |
-| {0-9;2}          | 0, 2, 4, 6, 8          |
-| {0-9;3}          | 0, 3, 6, 9             |
-| {9-0;2}          | 9, 7, 5, 3, 1          |
-| {9-0;3}          | 9, 6, 3, 0             |
-
-
 Other Features supported by __Sequential Links Rustler__
 ---------------
 - #### declining sequences
 
-    Within the range definition, make *Start* the larger and *Stop* the smaller value.
+    Within the sequence definition, make *Start* the larger and *Stop* the smaller value.
 
-    For example:  changing the range definition in the above example to `{20-0}` will generate the same page, but the images will display in reverse order.
+    For example:  changing the sequence definition in the above example to `{20-0}` will generate the same page, but the images will display in reverse order.
 
 - #### control spacing between generated values
 
     Between the *Stop* value and the closing curly bracket, insert a semi-colon and an integer representing the distance between consecutive values.
 
-    | range definition | set of values produced |
+    | sequence definition | set of values produced |
     | ---------------- | ---------------------- |
     | {0-9;2}          | 0, 2, 4, 6, 8          |
     | {0-9;3}          | 0, 3, 6, 9             |
@@ -82,14 +66,14 @@ Other Features supported by __Sequential Links Rustler__
 
 - #### zero padding
 
-    When a website's mumeric values include leading zeros, just include those in your range definition.  Examples:
+    When a website's mumeric values include leading zeros, just include those in your sequence definition.  Examples:
 
-    | range_definition | produces sequence       |
+    | sequence_definition | produces sequence       |
     | ---------------- | ----------------------- |
     | {01-20;5}        | 01, 06, 11, 16          |
     | {020-001; 4}     | 020, 016, 012, 008, 004 |
 
-- #### multiple range definitions within a URL mask
+- #### multiple sequence definitions within a URL mask
 
   For example: given the (partial), 3-level URL_mask `set{1-2}/subset{11-12}/pic{0-2}.jpg`, __Sequential Links Rustler__
   will produce the following (partial) link sequence

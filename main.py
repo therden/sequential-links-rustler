@@ -14,10 +14,10 @@ See the doc string for each function for more details.
 import os, re, textwrap, webbrowser
 
 
-def check_range_definitions(range_defs):
-    if not range_defs:
+def check_sequence_definitions(sequence_defs):
+    if not sequence_defs:
         raise Exception("No range definitions found")
-    for each in range_defs:
+    for each in sequence_defs:
         if not "-" in each:
             raise Exception("Hyphen missing between Start and End values")
         else:
@@ -25,7 +25,7 @@ def check_range_definitions(range_defs):
     return False
 
 
-def extract_range_definitions(URL_mask):
+def extract_sequence_definitions(URL_mask):
     """
     Given a well-formatted URL_mask, returns a list of tuples each of which
     containes the Start, End, and Stride values that define a range of integers.
@@ -33,29 +33,29 @@ def extract_range_definitions(URL_mask):
     Supports one or more series with either increasing or decreasing values, negative
     or positive strides, and values which do or don't include leading zeros.
     """
-    range_defs = re.findall(r"\{(.*?)\}", URL_mask)
-    if not check_range_definitions(range_defs):
+    sequence_defs = re.findall(r"\{(.*?)\}", URL_mask)
+    if not check_sequence_definitions(sequence_defs):
         exit()
 
     for each in range(URL_mask.count("{")):
-        if ";" in range_defs[each]:
-            span, stride = range_defs[each].split(";")
+        if ";" in sequence_defs[each]:
+            span, stride = sequence_defs[each].split(";")
             stride = int(stride)
             start, end = span.split("-")
             start, end = int(start), int(end)
         else:
             stride = 1
-            start, end = range_defs[each].split("-")
+            start, end = sequence_defs[each].split("-")
             start, end = int(start), int(end)
         if start > end:
             stride = -stride
         endshift = 1 if stride > 0 else -1
         end += endshift
-        range_defs[each] = (start, end, stride)
-    return range_defs
+        sequence_defs[each] = (start, end, stride)
+    return sequence_defs
 
 
-def get_value_tuples(range_defs, vals=[]):
+def get_value_tuples(sequence_defs, vals=[]):
     """
     Given a list of range definitions, recursively determines all combinations
     of values that will be used to generate the individual links which they
@@ -69,11 +69,11 @@ def get_value_tuples(range_defs, vals=[]):
         # elif start > end:
         #     stride = -1
         value_tuples = []
-    for each in range(*range_defs[0]):
+    for each in range(*sequence_defs[0]):
         values_list = [*vals]
         values_list.append(each)
-        if len(range_defs) > 1:
-            next_level = get_value_tuples(range_defs[1:], vals=values_list)
+        if len(sequence_defs) > 1:
+            next_level = get_value_tuples(sequence_defs[1:], vals=values_list)
             value_tuples += next_level
         else:
             value_tuples.append(tuple(values_list))
@@ -89,9 +89,9 @@ def rewrite_URL_mask(URL_mask):
     amended and returned as "http://example.com/%02d.jpg"
     """
     bracketed = re.findall(r"(\{.*?\})", URL_mask)
-    range_defs = re.findall(r"\{(.*?)\}", URL_mask)
-    for counter in range(len(range_defs)):
-        each = range_defs[counter]
+    sequence_defs = re.findall(r"\{(.*?)\}", URL_mask)
+    for counter in range(len(sequence_defs)):
+        each = sequence_defs[counter]
         if ";" in each:
             span, _ = each.split(";")
             start, end = span.split("-")
@@ -112,8 +112,8 @@ def get_URL_list_generator(URL_mask):
     This function combines the previous three, accepting a URL_mask and returning
     a generator object that emits the URL links defined by that mask.
     """
-    range_defs = extract_range_definitions(URL_mask)
-    value_tuples = get_value_tuples(range_defs)
+    sequence_defs = extract_sequence_definitions(URL_mask)
+    value_tuples = get_value_tuples(sequence_defs)
     new_URL_mask = rewrite_URL_mask(URL_mask)
     return (new_URL_mask % each for each in value_tuples)
 
