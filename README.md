@@ -12,7 +12,7 @@ When the design or organization of those pages makes accessing those resources a
 chore, you might want to generate your own HTML page with links to a selected
 subset of those resources.
 
-That's where `Sequential Links Rustler` comes in.
+That's where __Sequential Links Rustler__ comes in.
 
 
 Getting Started
@@ -28,25 +28,25 @@ Getting Started
 
 Basic Usage
 -----------
-`Sequential Links Rustler` accepts a __"URL mask"__ and generates an HTML page with links to the set of resources that were specified, opening it in a new browser tab.
+__Sequential Links Rustler__ accepts a __"URL mask"__ and generates an HTML page with links to the set of resources that were specified, opening the resulting file in a new browser tab.
 
-A __URL mask__ is a standard URL except that a __range definition__ has been substituted for a numeric value.
+A __URL mask__ is just like a standard URL, except that a __range definition__ has been substituted in place of a numeric value.
 
-A minimal __range definition__ consists of a *Start* integer and a *Stop* integer, separated by a hyphen and surrounded by curly brackets.
+A minimal __range definition__ consists of a *Start* integer and a *Stop* integer, separated by a hyphen and surrounded by curly brackets.  __Sequential Links Rustler__ generates a series of links, each matching the __URL mask__, with the __range definition__ replaced by the next sequential value it defines.
 
-For example: in the URL mask
+For example: the URL mask
 
 `https://therden.github.io/sequential-links-rustler/images/sausage{0-20}.jpeg`
 
-the range definition is `{0-20}`, and from it `Sequential Links Rustler` will produce and load an HTML page that looks like
+includes the range definition `{0-20}`, and from it __Sequential Links Rustler__ will produce and load an HTML page that looks like
 
 <figure>
 <img width="90%" align="center" src="assets/Links_screenshot.png">
 </figure>
 
-Changing the __range definition__ in the above example to `{20-0}` will generate the same page as is shown above, except that the order of the images will be reversed.
+__Sequential Links Rustler__ also supports sequences wit declining values. Changing the __range definition__ in the above example to `{20-0}` will generate the same page, but with the order of the images reversed.
 
-`Sequential Links Rustler` can generate sequences in which successive values differ by more than 1.  Between the *Stop* value and the closing curly bracket, insert a semi-colon and an integer representing the difference between consecutive values you desire.
+__Sequential Links Rustler__ can generate sequences in which successive values differ by more than 1.  Between the *Stop* value and the closing curly bracket, just insert a semi-colon and an integer representing the desired difference between consecutive values.
 
 | range definition | set of values produced |
 | ---------------- | ---------------------- |
@@ -58,40 +58,36 @@ Changing the __range definition__ in the above example to `{20-0}` will generate
 
 Other Features
 ---------------
-- zero padding:
-| range_definition | sequence                |
-| ---------------- | ----------------------- |
-| {01-20;5}        | 01, 06, 11, 15          |
-| {020-001; 4}     | 020, 016, 012, 008, 004 |
+- zero padding
 
-- multiple range definitions:
+    | range_definition | sequence                |
+    | ---------------- | ----------------------- |
+    | {01-20;5}        | 01, 06, 11, 15          |
+    | {020-001; 4}     | 020, 016, 012, 008, 004 |
 
-  for example, given the (partial), 3-level URL_mask `set{1-2}/subset{11-12}/pic{0-2}.jpg` `Sequential Links Rustler`
-  will produce the (partial) link sequence
-  - set1/subset11/pic0.jpg<br>
-  - set1/subset11/pic1.jpg<br>
-  - set1/subset11/pic2.jpg<br>
-  - set1/subset12/pic0.jpg<br>
-  - set1/subset12/pic1.jpg<br>
-  - set1/subset12/pic2.jpg<br>
-  - set2/subset11/pic0.jpg<br>
-  - set2/subset11/pic1.jpg<br>
-  - set2/subset11/pic2.jpg<br>
-  - set2/subset12/pic0.jpg<br>
-  - set2/subset12/pic1.jpg<br>
-  - set2/subset12/pic2.jpg<br>
+- multiple range definitions within a __URL mask__
 
+  For example: given the (partial), 3-level URL_mask `set{1-2}/subset{11-12}/pic{0-2}.jpg`, __Sequential Links Rustler__
+  will produce the following (partial) link sequence
 
-Other example URL-masks
------------------------
-- `https://therden.github.io/sequential-links-rustler/png_numbers/{5-0;-1}.png`
-- `https://therden.github.io/sequential-links-rustler/png_numbers/{100-120;4}.html`
-- `http://vision.stanford.edu/aditya86/ImageNetDogs/thumbnails/n02098286-West_Highland_white_terrier/n02098286_{0-6516;1}.jpg`
-<!--- `https://evolution.voxeo.com/library/audio/prompts/numbers/{0-10;1}.wav`-->
+  set1/subset11/pic0.jpg<br>
+  set1/subset11/pic1.jpg<br>
+  set1/subset11/pic2.jpg<br>
+  set1/subset12/pic0.jpg<br>
+  set1/subset12/pic1.jpg<br>
+  set1/subset12/pic2.jpg<br>
+  set2/subset11/pic0.jpg<br>
+  set2/subset11/pic1.jpg<br>
+  set2/subset11/pic2.jpg<br>
+  set2/subset12/pic0.jpg<br>
+  set2/subset12/pic1.jpg<br>
+  set2/subset12/pic2.jpg<br>
+
+For more example URL masks and additional information about __Sequential Links Rustler__, see [the GitHub pages associated with this project](https://therden.github.io/sequential-links-rustler/).
 
 ToDo
 ----
-I'm tracking ideas for features and improvements (along with bugs) in this repo's [Issues](https://github.com/therden/sequential-links-rustler/issues) -- feel free to make your own contributions.
+I'm tracking my ideas for improvements, new features, and bugs in this repo's [Issues](https://github.com/therden/sequential-links-rustler/issues) -- feel free to share your input there.
 
 Speaking of contributions
 -------------------------
@@ -107,9 +103,9 @@ Credits
 
 Thanks to [MikeTheWatchGuy](https://github.com/MikeTheWatchGuy) for creating and maintaining [PySimpleGUI](https://github.com/PySimpleGUI/PySimpleGUI).
 
-And also to Quinn for his encouragement (constructive criticism to come?)
+And also to Quinn for his encouragement.
 
-The source of the three black sausages incorporated into the image of "the Rustler" was the SVG at [Sausage by Jacob Halton from the Noun Project](https://thenounproject.com/term/sausage/4135/)
+The original source of the three black sausages that I incorporated into the logo of "The Rustler" was the SVG found at [Sausage by Jacob Halton from the Noun Project](https://thenounproject.com/term/sausage/4135/)
 
 
 <!--

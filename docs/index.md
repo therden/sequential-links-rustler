@@ -1,14 +1,14 @@
-# index.md
+# GitHub Page(s) for __Sequential Links Rustler__
 
-This placeholder file is saved to the `\docs` subdirectory so that `Github Pages` will work with the `Sequential Links Rustler` repo (once it becomes Public.)
+This file is saved in the repo's `\docs` subdirectory, which is the source for the project's `Github Pages`.
 
-Some directories and image files are saved under `\docs` and will be used to illustrate how `Sequential Links Rustler` works.
+Subirectories and other files saved under `\docs` are used in both README.md and in this file to illustrate how `Sequential Links Rustler` works.
 
-Experiment: Embed javascript to copy example URL_mask
+
+More example __URL masks__
 ----
-
-<button onclick="copyEx1()">Copy</button><input type="text" size="60ch" value="https://therden.github.io/sequential-links-rustler/png_numbers/{5-0;-1}.png" id="Ex1">
-
+Sequential links with values declining by 1<br>
+<button onclick="copyEx1()">Copy</button><input type="text" size="60ch" value="https://therden.github.io/sequential-links-rustler/png_numbers/{5-0}.png" id="Ex1">
 <script>
 function copyEx1() {
   var copyText = document.getElementById("Ex1");
@@ -16,3 +16,38 @@ function copyEx1() {
   document.execCommand("copy");
 }
 </script>
+
+Sequential links with values declining by 2<br>
+<button onclick="copyEx2()">Copy</button><input type="text" size="60ch" value="https://therden.github.io/sequential-links-rustler/png_numbers/{5-0;2}.png" id="Ex2">
+<script>
+function copyEx2() {
+  var copyText = document.getElementById("Ex2");
+  copyText.select();
+  document.execCommand("copy");
+}
+</script>
+
+Three-level embedded __range definition__s<br>
+<button onclick="copyEx3()">Copy</button><input type="text" size="85ch" value="https://therden.github.io/sequential-links-rustler/gallery/{01-02}/set{1-2}/thumbnail_{0-1}.jpeg" id="Ex3">
+<script>
+function copyEx3() {
+  var copyText = document.getElementById("Ex3");
+  copyText.select();
+  document.execCommand("copy");
+}
+</script>
+
+
+Thousands of links, only some of which actually exist<br>
+<button onclick="copyEx4()">Copy</button><input type="text" size="95ch" value="http://vision.stanford.edu/aditya86/ImageNetDogs/thumbnails/n02098286-West_Highland_white_terrier/n02098286_{0-6516;1}.jpg" id="Ex4">
+<script>
+function copyEx4() {
+  var copyText = document.getElementById("Ex4");
+  copyText.select();
+  document.execCommand("copy");
+}
+</script>
+
+
+<!--- `https://therden.github.io/sequential-links-rustler/png_numbers/{100-120;4}.html`--->
+<!--- `https://evolution.voxeo.com/library/audio/prompts/numbers/{0-10;1}.wav`-->
