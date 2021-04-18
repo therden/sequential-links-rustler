@@ -20,7 +20,7 @@ Getting Started
 1.  Clone this repository, or download and extract [this zip file](https://github.com/therden/sequential-links-rustler/archive/refs/heads/main.zip)
 2.  Change to the directory containing these files
 3.  Run `python slr.py` or `python3 slr.py`
-4.  In the GUI, fill in the URL mask (see examples below<!--, and more [here](`https://therden.github.io/sequential-links-rustler/-->) and click the button labeled _Rustle Up Some Links_, <!--set any desired options,--> then sit back and wait (not long!) for your new web page to load.
+4.  In the GUI, fill in the URL mask (see examples below,<!--, and more [here](`https://therden.github.io/sequential-links-rustler/-->) then click the button labeled _Rustle Up Some Links_, <!--set any desired options,--> then sit back and wait (not long!) for your new web page to load.
 
 <figure>
 <img width="90%" align="center" src="assets/SLR_screenshot.png">
@@ -28,49 +28,73 @@ Getting Started
 
 Basic Usage
 -----------
-`Sequential Links Rustler` takes a __"URL mask"__ containing at least one __"range definition"__ and generates an HTML page with links to the set of resources that were specified, opening it in a new browser tab.
+`Sequential Links Rustler` accepts a __"URL mask"__ and generates an HTML page with links to the set of resources that were specified, opening it in a new browser tab.
 
-A __URL mask__ is just a standard URL, except that in one or more portions a numeric value has been replaced by __range definition__.
+A __URL mask__ is a standard URL except that a __range definition__ has been substituted for a numeric value.
 
-A __range definition__ is written within curly brackets, and at a minimum consists of a Start integer and a Stop integer separated by a hyphen.  `Sequential Links Rustler` calculates the set of values described by the __range definition__ and then generates a series of links, each of which replaces the __range definition__ with the next value in the set.
+A minimal __range definition__ consists of a *Start* integer and a *Stop* integer, separated by a hyphen and surrounded by curly brackets.
 
-If the Stop value is larger than the Start value then, by default, the value inserted into each generated link be one greater than the last.
+For example: in the URL mask
 
-For example: the URL mask<br>
-`https://therden.github.io/sequential-links-rustler/images/sausage{0-20}.jpeg`<br>
-contains the range definition `{0-20}` and produces and loads an HTML page that looks like
+`https://therden.github.io/sequential-links-rustler/images/sausage{0-20}.jpeg`
+
+the range definition is `{0-20}`, and from it `Sequential Links Rustler` will produce and load an HTML page that looks like
 
 <figure>
 <img width="90%" align="center" src="assets/Links_screenshot.png">
 </figure>
 
-If the Stop value is smaller than the Start value, then the value inserted in each link will be one less than the last.  So the mask <br>
-`https://therden.github.io/sequential-links-rustler/images/sausage{20-0}.jpeg`<br> will generate the same page as is shown above, but with the images in reverse order.
+Changing the __range definition__ in the above example to `{20-0}` will generate the same page as is shown above, except that the order of the images will be reversed.
 
-These +1 or -1 values are referred to as the __range definition__'s "stride" -- the distance between one value and the next.  
-
-`Sequential Links Rustler` supports "strides" longer than 1.  When desired, these are specified within the __range definition__ by following the Stop value with a semi-colon and an integer representing the desired "stride".  (It will be interpreted as positive or negative depending on the Stop and Start values in the __range definition__.)
+`Sequential Links Rustler` can generate sequences in which successive values differ by more than 1.  Between the *Stop* value and the closing curly bracket, insert a semi-colon and an integer representing the difference between consecutive values you desire.
 
 | range definition | set of values produced |
 | ---------------- | ---------------------- |
-| {0-9; 2} | 0, 2, 4, 6, 8 |
-| {0-9; 3} | 0, 3, 6, 9 |
-| {9-0; 2} | 9, 7, 5, 3, 1 |
-| {9-0; 3} | 9, 6, 3, 0 |
+| {0-9;2}          | 0, 2, 4, 6, 8          |
+| {0-9;3}          | 0, 3, 6, 9             |
+| {9-0;2}          | 9, 7, 5, 3, 1          |
+| {9-0;3}          | 9, 6, 3, 0             |
 
 
 Other Features
 ---------------
+- zero padding:
+| range_definition | sequence                |
+| ---------------- | ----------------------- |
+| {01-20;5}        | 01, 06, 11, 15          |
+| {020-001; 4}     | 020, 016, 012, 008, 004 |
 
-- zero padding
-    - the range definition `{01-10;1}` will produce links with the values `01, 02, 03, 04, 05, 06, 07, 08, 09, 10`
-    the range definition `{001-010}` will produce links with the values `001, 002, 003, 004, 005, 006, 007, 008, 009, 010`
-- multiple range definitions within a single URL mask
-    - copy the following into `Sequential Links Rustler` and hover over the images in order to see how the three range definitions are processed recursively, left-to-right.
-    `https://therden.github.io/sequential-links-rustler/levels/gallery{01-03;1}/set{1-2;1}/thumbnail_{3-0;-1}.jpeg`
+- multiple range definitions:
+
+  for example, given the (partial), 3-level URL_mask `set{1-2}/subset{11-12}/pic{0-2}.jpg` `Sequential Links Rustler`
+  will produce the (partial) link sequence
+  - set1/subset11/pic0.jpg<br>
+  - set1/subset11/pic1.jpg<br>
+  - set1/subset11/pic2.jpg<br>
+  - set1/subset12/pic0.jpg<br>
+  - set1/subset12/pic1.jpg<br>
+  - set1/subset12/pic2.jpg<br>
+  - set2/subset11/pic0.jpg<br>
+  - set2/subset11/pic1.jpg<br>
+  - set2/subset11/pic2.jpg<br>
+  - set2/subset12/pic0.jpg<br>
+  - set2/subset12/pic1.jpg<br>
+  - set2/subset12/pic2.jpg<br>
+
 
 Other example URL-masks
 -----------------------
+<button onclick="copyEx1()">Copy</button>
+<input type="text" value="https://therden.github.io/sequential-links-rustler/png_numbers/{5-0;-1}.png" id="Ex1">
+<script>
+function copyEx1() {
+  var copyText = document.getElementById("Ex1");
+  copyText.select();
+  document.execCommand("copy");
+}
+</script>
+
+
 - `https://therden.github.io/sequential-links-rustler/png_numbers/{5-0;-1}.png`
 - `https://therden.github.io/sequential-links-rustler/png_numbers/{100-120;4}.html`
 - `http://vision.stanford.edu/aditya86/ImageNetDogs/thumbnails/n02098286-West_Highland_white_terrier/n02098286_{0-6516;1}.jpg`
