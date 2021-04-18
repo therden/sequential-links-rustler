@@ -100,8 +100,10 @@ def rewrite_URL_mask(URL_mask):
             start, end = each.split("-")
         formatmask = "%01d"
         togo = bracketed[counter]
-        if int(start[0]) * int(end[0]) == 0:
+        if int(start) <= int(end) and start[0] == "0":
             formatmask = f"%0{len(start)}d"
+        elif int(start) > int(end) and end[0] == "0":
+            formatmask = f"%0{len(end)}d"
         URL_mask = re.sub(rf"({togo})", formatmask, URL_mask, 1)
     return URL_mask
 
