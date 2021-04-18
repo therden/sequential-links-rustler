@@ -84,17 +84,6 @@ Other Features
 
 Other example URL-masks
 -----------------------
-<button onclick="copyEx1()">Copy</button>
-<input type="text" value="https://therden.github.io/sequential-links-rustler/png_numbers/{5-0;-1}.png" id="Ex1">
-<script>
-function copyEx1() {
-  var copyText = document.getElementById("Ex1");
-  copyText.select();
-  document.execCommand("copy");
-}
-</script>
-
-
 - `https://therden.github.io/sequential-links-rustler/png_numbers/{5-0;-1}.png`
 - `https://therden.github.io/sequential-links-rustler/png_numbers/{100-120;4}.html`
 - `http://vision.stanford.edu/aditya86/ImageNetDogs/thumbnails/n02098286-West_Highland_white_terrier/n02098286_{0-6516;1}.jpg`
