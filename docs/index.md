@@ -8,7 +8,7 @@ Experiment: Embed javascript to copy example URL_mask
 ----
 
 <button onclick="copyEx1()">Copy</button>
-<input type="text" value="https://therden.github.io/sequential-links-rustler/png_numbers/{5-0;-1}.png" onvalue="this.style.width = ((this.value.length + 1) * 8) + 'px';" id="Ex1">
+<input type="text" value="https://therden.github.io/sequential-links-rustler/png_numbers/{5-0;-1}.png"  width="77px" id="Ex1">
 <script>
 function copyEx1() {
   var copyText = document.getElementById("Ex1");
