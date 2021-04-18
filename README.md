@@ -60,9 +60,9 @@ The range definition shown above generated a sequence of links that were increme
 Other example URL-masks
 -----------------------
 - `https://therden.github.io/sequential-links-rustler/png_numbers/{5-0;-1}.png`
-<!--- `https://evolution.voxeo.com/library/audio/prompts/numbers/{0-10;1}.wav`-->
 - `https://therden.github.io/sequential-links-rustler/png_numbers/{100-120;4}.html`
-- `http://vision.stanford.edu/aditya86/ImageNetDogs/thumbnails/n02098286-West_Highland_white_terrier/n02098286_{1009-1983;1}.jpg`
+- `http://vision.stanford.edu/aditya86/ImageNetDogs/thumbnails/n02098286-West_Highland_white_terrier/n02098286_{0-6516;1}.jpg`
+<!--- `https://evolution.voxeo.com/library/audio/prompts/numbers/{0-10;1}.wav`-->
 
 ToDo
 ----
