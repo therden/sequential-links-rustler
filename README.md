@@ -80,7 +80,7 @@ Other Features
 
 - #### multiple sequence definitions within a single URL mask
 
-  For example: given the (partial), 3-level URL_mask `set{1-2}/subset{11-12}/pic{0-2}.jpg`, __Sequential Links Rustler__
+  For example: given the (partial), 3-level URL_mask `foo{1-2}/bar{11-12}/pic{0-2}.jpg`, __Sequential Links Rustler__
   will produce the following (partial) link sequence
 
   foo1/bar11/pic0.jpeg<br>
