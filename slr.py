@@ -9,7 +9,7 @@ from main import rustle_up_some_links as do_it
 window_title = "Sequential Links Rustler"
 
 logo_image = sg.Image(
-    filename="logo.png",
+    filename="assets/logo.png",
     data=None,
     background_color=None,
     size=(120, 136),
