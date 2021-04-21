@@ -114,7 +114,7 @@ def get_URL_list_generator(URL_mask):
     return (new_URL_mask % each for each in value_tuples)
 
 
-def get_HTML_file(URL_mask, targetfile=None, hide_missing=False):
+def get_HTML_file(URL_mask, targetfile=None, thumbsize="150px", hide_missing=False):
     """
     Accepts a URL_mask and saves all of the URL links which it defines to a
     file ("links.html" by default, but target file name can be overwritten.)
@@ -123,14 +123,15 @@ def get_HTML_file(URL_mask, targetfile=None, hide_missing=False):
     if links_are_images and hide_missing:
         style = "<style>img {display: none}</style> <! In case of missing imgs: "
         style += "Script at end of BODY will display all that load successfully.)>"
-        display_imgs_script = """
+        display_imgs_script = (
+            """
         <! The following script displays all imgs that load succesfully.>
         <script>
             (function() {
                 var allimgs = document.images;
                 for (var i = 0; i < allimgs.length; i++) {
                     allimgs[i].onload = function() {
-                        this.style.width      = "150px"
+                        this.style.width      = "%s"
                         this.style.display    = "inline"
                         this.style.padding    = "5x"
                         this.style.position   = "relative"
@@ -141,9 +142,11 @@ def get_HTML_file(URL_mask, targetfile=None, hide_missing=False):
             ();
         </script>
         """
+            % thumbsize
+        )
         display_imgs_script = textwrap.dedent(display_imgs_script)
     elif links_are_images:
-        style = "<style>img {width: 150px; padding: 5x; position: relative; visibility: visible; display: inline}</style>"
+        style = f"<style>img {width: {thumbsize}; padding: 5x; position: relative; visibility: visible; display: inline}</style>"
         display_imgs_script = ""
     else:
         style = ""
@@ -211,9 +214,13 @@ def open_file_in_default_browser(URL):
     wb.open_new_tab(URL)
 
 
-def make_and_open_HTML_file_from_URL_mask(URL_mask, targetfile=None, hide_missing=True):
+def make_and_open_HTML_file_from_URL_mask(
+    URL_mask, targetfile=None, thumbsize="150px", hide_missing=True
+):
     """Again: the name says it all.  Uses the functions defined above."""
-    URL = get_HTML_file(URL_mask, targetfile=targetfile, hide_missing=hide_missing)
+    URL = get_HTML_file(
+        URL_mask, targetfile=targetfile, thumbsize=thumbsize, hide_missing=hide_missing
+    )
     open_file_in_default_browser(URL)
 
 

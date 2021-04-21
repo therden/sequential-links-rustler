@@ -60,21 +60,35 @@ layout = [
                 # [sg.Text("Edit URL mask:"), sg.Input(key="-ThumbnailMask-")],
                 # [sg.Text("")],
                 [
+                    sg.Text((26 * " ") + "Image thumbnail size:"),
+                    sg.Input(size=(3, 1), default_text="150", key="-ThumbSizeNum-"),
+                    sg.Radio(
+                        "# pixels",
+                        group_id="-ThumbSizeUnits-",
+                        default=True,
+                        key="-Pixels-",
+                    ),
+                    sg.Radio(
+                        "% window width",
+                        group_id="-ThumbSizeUnits-",
+                        key="-PercentWidth-",
+                    ),
+                ],
+                [
                     sg.Text(24 * " "),
                     sg.Checkbox(
-                        " Hide broken Image links",
+                        " Hide empty links (images only)",
                         default=True,
                         key="-HideBorkedImages-",
                     ),
                 ],
-                [sg.Text("")],
+                # [sg.Text("")],
                 [sg.Text("")],
                 [sg.Text("")],
                 [sg.Button("Rustle Up Some Links", key="-DoIt-"), sg.Button("Quit"),],
             ]
         ),
     ],
-    # [sg.Button("Generate, Save, and Open File"), sg.Button("Quit")],
 ]
 
 # Create the window
@@ -83,16 +97,23 @@ window = sg.Window(window_title, layout)
 # Display and interact with the Window using an Event Loop
 while True:
     event, values = window.read()
+    # print(values)
     # See if user wants to quit or window was closed
     if event == sg.WINDOW_CLOSED or event == "Quit":
         break
     elif event == "-DoIt-":
+        thumbsize = values["-ThumbSizeNum-"]
+        if values["-Pixels-"]:
+            thumbsize += "px"
+        else:
+            thumbsize += "%"
         proc_id = "slr_" + str(int(random.random() * 1000000000000))
         d = multiprocessing.Process(
             name=proc_id,
             target=do_it(
                 values["-URLMask-"],
                 targetfile="rustled.html",
+                thumbsize=thumbsize,
                 hide_missing=values["-HideBorkedImages-"],
             ),
         )
