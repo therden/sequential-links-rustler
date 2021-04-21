@@ -23,6 +23,7 @@ logo_image = sg.Image(
 )
 
 left_buttons = [
+    [sg.Text("")],
     [logo_image],
     [sg.Text("")],
     [sg.Text("")],
@@ -51,7 +52,8 @@ layout = [
                 # [sg.Button("Copy above URL below")],
                 [
                     sg.Text("Enter and edit URL mask:"),
-                    sg.Input(key="-URLMask-", size=(65, 1)),
+                    # sg.Input(key="-URLMask-", size=(65, 1)),
+                    sg.Multiline(key="-URLMask-", size=(65, 3)),
                     sg.Button("Clear", key="-Clear URL mask-"),
                 ],
                 # [sg.Text("Enter/paste original URL:"), sg.Input(key="-Thumbnail-")],
