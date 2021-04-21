@@ -1,29 +1,33 @@
 # Sequential Links Rustler
 
-<img width="45%" align="right" src="https://github.com/therden/links-rustler/blob/main/combined.png">
+<!-- <img width="45%" align="right" src="https://github.com/therden/links-rustler/blob/main/assets/combined.png"> -->
+
+<figure>
+<img width="45%" align="right" src="assets/combined.png">
+</figure>
 
 *Prepares and presents them tasty links just the way you like*
 
 Website pages sometimes contain links -- other web pages, or image, video,
-sound, or text files -- for which the files and/or directories are named using
-numeric sequences.
+sound, or text files -- for which the files and/or the directories they're
+stored in have been named using numeric sequences.
 
-When the design or organization of those pages makes accessing those resources a
-chore, you might want to generate your own HTML page with links to a selected
-subset of those resources.
+When the design or organization of those pages makes it a chore to access those
+resources, you might want to generate your own HTML page with links to a
+selected subset of those resources.
 
 That's where __Sequential Links Rustler__ comes in.
 
 
 Getting Started
 ---------------
+0.  (You will need to have Python 3 installed on your system.)
 1.  Clone this repository, or download and extract [this zip file](https://github.com/therden/sequential-links-rustler/archive/refs/heads/main.zip)
-
 2.  Change to the directory containing these files
 3.  Run `python slr.py` or `python3 slr.py`
 4.  In the resulting GUI dialog
     - fill in the URL mask -- see examples below and [here](https://therden.github.io/sequential-links-rustler),
-    <!-- - set any desired options,-->
+    - change options (if desired),
     - click _Rustle Up Some Links_, and then
     - sit back and wait (not long!) for your new web page to load.
 
@@ -49,61 +53,62 @@ includes the sequence definition `{0-20}`, and from it __Sequential Links Rustle
 <img width="90%" align="center" src="assets/Links_screenshot.png">
 </figure>
 
+Special features for links to images
+------------------------------------
+- #### Specify the size of thumbnail images in pixels or % of browser window
+- #### Choose whether to hide or display links to inaccessible image files
+<!-- - #### Specify a separate URL mask for thumbnail images from full-size images -->
+
 Other Features
 ---------------
-- #### declining sequences
-
-    Within the sequence definition, make *Start* the larger and *Stop* the smaller value.
-
-    For example:  changing the sequence definition in the above example to `{20-0}` will generate the same page, but the images will display in reverse order.
-
-- #### spacing between generated values
-
-    Between the *Stop* value and the closing curly bracket, insert a semi-colon and an integer representing the distance between consecutive values.
-
-    | sequence definition | set of values produced |
-    | ---------------- | ---------------------- |
-    | {0-9;2}          | 0, 2, 4, 6, 8          |
-    | {0-9;3}          | 0, 3, 6, 9             |
-    | {9-0;2}          | 9, 7, 5, 3, 1          |
-    | {9-0;3}          | 9, 6, 3, 0             |
-
-
-- #### zero padding
-
-    When a website's numeric values include leading zeros, just include those in your sequence definition.  Examples:
-
-    | sequence_definition | produces sequence       |
-    | ---------------- | ----------------------- |
-    | {01-20;5}        | 01, 06, 11, 16          |
-    | {020-001; 4}     | 020, 016, 012, 008, 004 |
-
-- #### multiple sequence definitions within a single URL mask
-
-  For example: given the (partial), 3-level URL_mask `foo{1-2}/bar{11-12}/pic{0-2}.jpg`, __Sequential Links Rustler__
-  will produce the following (partial) link sequence
-
-  foo1/bar11/pic0.jpeg<br>
-  foo1/bar11/pic1.jpeg<br>
-  foo1/bar11/pic2.jpeg<br>
-  foo1/bar12/pic0.jpeg<br>
-  foo1/bar12/pic1.jpeg<br>
-  foo1/bar12/pic2.jpeg<br>
-  foo2/bar11/pic0.jpeg<br>
-  foo2/bar11/pic1.jpeg<br>
-  foo2/bar11/pic2.jpeg<br>
-  foo2/bar12/pic0.jpeg<br>
-  foo2/bar12/pic1.jpeg<br>
-  foo2/bar12/pic2.jpeg<br>
-
-<!---
-- #### Choose whether to show or hide links that point to inaccessible resources
-- #### Choose the location where the generated HTML file will be saved
+<!-- - #### Choose the location where the generated HTML file will be saved
 - #### Choose name of the generated HTML file that's generated
-- #### Choose the browser in which to open the generated HTML file
-- #### Choose the maximum width of the images displayed in pixels or % of page
-- #### Specify a separate URL mask for thumbnail images from full-size images
---->
+- #### Choose the browser in which to open the generated HTML file -->
+- #### Advanced sequence definition features
+    - ##### declining sequences
+
+        Within the sequence definition, make *Start* the larger and *Stop* the smaller value.
+
+        For example:  changing the sequence definition in the above example to `{20-0}` will generate the same page, but the images will display in reverse order.
+
+    - ##### spacing between generated values
+
+        Between the *Stop* value and the closing curly bracket, insert a semi-colon and an integer representing the distance between consecutive values.
+
+        | sequence definition | set of values produced |
+        | ------------------- | ---------------------- |
+        | {0-9;2}             | 0, 2, 4, 6, 8          |
+        | {0-9;3}             | 0, 3, 6, 9             |
+        | {9-0;2}             | 9, 7, 5, 3, 1          |
+        | {9-0;3}             | 9, 6, 3, 0             |
+
+    - ##### zero padding
+
+        When a website's numeric values include leading zeros, just include those in your sequence definition.  Examples:
+
+        | sequence_definition | produces sequence       |
+        | ------------------- | ----------------------- |
+        | {01-20;5}           | 01, 06, 11, 16          |
+        | {020-001; 4}        | 020, 016, 012, 008, 004 |
+
+    - ##### multiple sequence definitions within a single URL mask
+
+        For example: given the (partial), 3-level URL_mask
+        `foo{1-2}/bar{11-12}/pic{0-2}.jpg`
+        __Sequential Links Rustler__ will produce the following (partial) link sequence
+
+        foo1/bar11/pic0.jpeg<br>
+        foo1/bar11/pic1.jpeg<br>
+        foo1/bar11/pic2.jpeg<br>
+        foo1/bar12/pic0.jpeg<br>
+        foo1/bar12/pic1.jpeg<br>
+        foo1/bar12/pic2.jpeg<br>
+        foo2/bar11/pic0.jpeg<br>
+        foo2/bar11/pic1.jpeg<br>
+        foo2/bar11/pic2.jpeg<br>
+        foo2/bar12/pic0.jpeg<br>
+        foo2/bar12/pic1.jpeg<br>
+        foo2/bar12/pic2.jpeg<br>
 
 For more example URL masks and additional information about __Sequential Links Rustler__, see [the GitHub pages associated with this project](https://therden.github.io/sequential-links-rustler/).
 
@@ -121,7 +126,7 @@ __Buy Me a Coffee__ is a great way to publicly support creators.  It's quick, ea
 
 Credits
 -------
-<img width="125px" align="right" src="logo.png">
+<img width="125px" align="right" src="assets/logo.png">
 
 Thanks to [MikeTheWatchGuy](https://github.com/MikeTheWatchGuy) for creating and maintaining [PySimpleGUI](https://github.com/PySimpleGUI/PySimpleGUI).
 
