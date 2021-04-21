@@ -17,7 +17,7 @@ That's where __Sequential Links Rustler__ comes in.
 
 Getting Started
 ---------------
-1.  Clone this repository, or download and extract [this zip file](https://therden/sequential-links-rustler/archive/refs/heads/main.zip)
+1.  Clone this repository, or download and extract [this zip file](https://github.com/therden/sequential-links-rustler/archive/refs/heads/main.zip)
 
 2.  Change to the directory containing these files
 3.  Run `python slr.py` or `python3 slr.py`
