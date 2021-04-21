@@ -58,8 +58,13 @@ layout = [
                 ],
                 # [sg.Text("Enter/paste original URL:"), sg.Input(key="-Thumbnail-")],
                 # [sg.Text("Edit URL mask:"), sg.Input(key="-ThumbnailMask-")],
-                [sg.Text("")],
-                [sg.Text("")],
+                # [sg.Text("")],
+                [
+                    sg.Text(24 * " "),
+                    sg.Checkbox(
+                        " Hide broken links", default=True, key="-HideBorkedLinks-"
+                    ),
+                ],
                 [sg.Text("")],
                 [sg.Text("")],
                 [sg.Text("")],
@@ -82,7 +87,12 @@ while True:
     elif event == "-DoIt-":
         proc_id = "slr_" + str(int(random.random() * 1000000000000))
         d = multiprocessing.Process(
-            name=proc_id, target=do_it(values["-URLMask-"], targetfile="rustled.html"),
+            name=proc_id,
+            target=do_it(
+                values["-URLMask-"],
+                targetfile="rustled.html",
+                hide_missing=values["-HideBorkedLinks-"],
+            ),
         )
         d.daemon = True
         d.start()
