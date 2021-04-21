@@ -62,7 +62,9 @@ layout = [
                 [
                     sg.Text(24 * " "),
                     sg.Checkbox(
-                        " Hide broken links", default=True, key="-HideBorkedLinks-"
+                        " Hide broken Image links",
+                        default=True,
+                        key="-HideBorkedImages-",
                     ),
                 ],
                 [sg.Text("")],
@@ -91,12 +93,11 @@ while True:
             target=do_it(
                 values["-URLMask-"],
                 targetfile="rustled.html",
-                hide_missing=values["-HideBorkedLinks-"],
+                hide_missing=values["-HideBorkedImages-"],
             ),
         )
         d.daemon = True
         d.start()
-        # do_it(values["-URLMask-"], targetfile="rustled.html")
     elif event == "-Clear URL mask-":
         window["-URLMask-"].update("")
     else:
