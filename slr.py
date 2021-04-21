@@ -61,18 +61,14 @@ layout = [
                 # [sg.Text("")],
                 [
                     sg.Text((26 * " ") + "Image thumbnail size:"),
-                    sg.Input(size=(3, 1), default_text="150", key="-ThumbSizeNum-"),
-                    sg.Radio(
-                        "# pixels",
-                        group_id="-ThumbSizeUnits-",
-                        default=True,
-                        key="-Pixels-",
-                    ),
+                    sg.Input(size=(3, 1), default_text="14", key="-ThumbSizeNum-"),
                     sg.Radio(
                         "% window width",
+                        default=True,
                         group_id="-ThumbSizeUnits-",
                         key="-PercentWidth-",
                     ),
+                    sg.Radio("# pixels", group_id="-ThumbSizeUnits-", key="-Pixels-",),
                 ],
                 [
                     sg.Text(24 * " "),
