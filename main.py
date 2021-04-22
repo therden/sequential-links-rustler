@@ -11,7 +11,9 @@ will include the "stop" value.
 
 See the doc string for each function for more details.
 """
-import os, re, textwrap, webbrowser
+import os, re, textwrap, threading, webbrowser
+
+from lookup import supported_image_extensions
 
 
 def check_sequence_definitions(sequence_defs):
@@ -114,7 +116,7 @@ def get_URL_list_generator(URL_mask):
     return (new_URL_mask % each for each in value_tuples)
 
 
-def get_HTML_file(URL_mask, targetfile=None, thumbsize="150px", hide_missing=False):
+def get_HTML_file(URL_mask, targetfile=None, thumbsize="16%", hide_missing=False):
     """
     Accepts a URL_mask and saves all of the URL links which it defines to a
     file ("links.html" by default, but target file name can be overwritten.)
@@ -178,27 +180,9 @@ def get_HTML_file(URL_mask, targetfile=None, thumbsize="150px", hide_missing=Fal
 
 
 def are_links_images(URL_mask):
-    image_extensions = (
-        "apng",
-        "avif",
-        "bmp",
-        "gif",
-        "ico",
-        "jpg",
-        "jpeg",
-        "jfif",
-        "pjpeg",
-        "pjp",
-        "png",
-        "svg",
-        "webp",
-        "cur",
-        "tif",
-        "tiff",
-    )
     URL_mask = URL_mask.strip().lower()
     _, ext = URL_mask[-6:].split(".")
-    return ext in image_extensions
+    return ext in supported_image_extensions
 
 
 # def open_file_in_firefox(URL):
@@ -206,22 +190,38 @@ def are_links_images(URL_mask):
 #     webbrowser.register("firefox", None, webbrowser.GenericBrowser("firefox"))
 #     ff = webbrowser.get("firefox")
 #     ff.open_new_tab(URL)
+#
+#
+# def open_file_in_default_browser(URL):
+#     """The name says it all."""
+#     wb = webbrowser.get()
+#     wb.open_new_tab(URL)
 
 
-def open_file_in_default_browser(URL):
+def open_file_in_selected_browser(URL, selected_browser=None):
     """The name says it all."""
-    wb = webbrowser.get()
-    wb.open_new_tab(URL)
+    if selected_browser in ("system_default", None):
+        wb = webbrowser.get()
+    else:
+        webbrowser.register(
+            selected_browser, None, webbrowser.GenericBrowser(selected_browser)
+        )
+        wb = webbrowser.get(using=selected_browser)
+    browser_process = lambda: wb.open_new_tab(URL)
+    t = threading.Thread(target=browser_process)
+    t.start()
 
 
 def make_and_open_HTML_file_from_URL_mask(
-    URL_mask, targetfile=None, thumbsize="150px", hide_missing=True
+    URL_mask, targetfile=None, selected_browser=None, thumbsize="16%", hide_missing=True
 ):
     """Again: the name says it all.  Uses the functions defined above."""
     URL = get_HTML_file(
         URL_mask, targetfile=targetfile, thumbsize=thumbsize, hide_missing=hide_missing
     )
-    open_file_in_default_browser(URL)
+    # open_file_in_default_browser(URL)
+    # open_file_in_selected_browser(URL, selected_browser=None)
+    open_file_in_selected_browser(URL, selected_browser=selected_browser)
 
 
 rustle_up_some_links = make_and_open_HTML_file_from_URL_mask
@@ -251,4 +251,6 @@ def test_URL_generation_from_masks():
 
 
 if __name__ == "__main__":
-    test_URL_generation_from_masks()
+    # test_URL_generation_from_masks()
+    # open_file_in_selected_browser("rustled.html", selected_browser="firefox")
+    open_file_in_selected_browser("rustled.html", selected_browser="chromium-browser")

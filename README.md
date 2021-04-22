@@ -53,25 +53,27 @@ includes the sequence definition `{0-20}`, and from it __Sequential Links Rustle
 <img width="90%" align="center" src="assets/Links_screenshot.png">
 </figure>
 
-Special features for links to images
-------------------------------------
-- #### Specify the size of thumbnail images in pixels or % of browser window
-- #### Choose whether to hide or display links to inaccessible image files
+Special features for image links
+--------------------------------
+- __Specify the size of thumbnail images as % of browser window or in pixels__
+
+- __Choose whether to hide or display links to inaccessible image files__
 <!-- - #### Specify a separate URL mask for thumbnail images from full-size images -->
 
 Other Features
 ---------------
-<!-- - #### Choose the location where the generated HTML file will be saved
-- #### Choose name of the generated HTML file that's generated
-- #### Choose the browser in which to open the generated HTML file -->
-- #### Advanced sequence definition features
-    - ##### declining sequences
+<!-- - #### Choose the location where the generated HTML file will be saved -->
+<!-- - #### Choose name of the generated HTML file that's generated -->
+- __Choose the browser in which the generated HTML file will open__
+
+- __Advanced sequence definition features__
+    - ###### declining sequences
 
         Within the sequence definition, make *Start* the larger and *Stop* the smaller value.
 
         For example:  changing the sequence definition in the above example to `{20-0}` will generate the same page, but the images will display in reverse order.
 
-    - ##### spacing between generated values
+    - ###### spacing between generated values
 
         Between the *Stop* value and the closing curly bracket, insert a semi-colon and an integer representing the distance between consecutive values.
 
@@ -82,7 +84,7 @@ Other Features
         | {9-0;2}             | 9, 7, 5, 3, 1          |
         | {9-0;3}             | 9, 6, 3, 0             |
 
-    - ##### zero padding
+    - ###### zero padding
 
         When a website's numeric values include leading zeros, just include those in your sequence definition.  Examples:
 
@@ -91,7 +93,7 @@ Other Features
         | {01-20;5}           | 01, 06, 11, 16          |
         | {020-001; 4}        | 020, 016, 012, 008, 004 |
 
-    - ##### multiple sequence definitions within a single URL mask
+    - ###### multiple sequence definitions within a single URL mask
 
         For example: given the (partial), 3-level URL_mask
         `foo{1-2}/bar{11-12}/pic{0-2}.jpg`

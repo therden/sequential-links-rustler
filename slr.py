@@ -3,7 +3,9 @@ import multiprocessing, random
 import PySimpleGUI as sg
 
 from main import rustle_up_some_links as do_it
+from lookup import supported_browsers
 
+thumbsize_percentages = [str(each) for each in range(1, 101)]
 
 # Define the window's contents
 window_title = "Sequential Links Rustler"
@@ -61,7 +63,13 @@ layout = [
                 # [sg.Text("")],
                 [
                     sg.Text((26 * " ") + "Image thumbnail size:"),
-                    sg.Input(size=(3, 1), default_text="14", key="-ThumbSizeNum-"),
+                    # sg.Input(size=(3, 1), default_text="13", key="-ThumbSizeNum-"),
+                    sg.Spin(
+                        thumbsize_percentages,
+                        initial_value="13",
+                        size=(4, 4),
+                        key="-ThumbSizeNum-",
+                    ),
                     sg.Radio(
                         "% window width",
                         default=True,
@@ -79,7 +87,19 @@ layout = [
                     ),
                 ],
                 # [sg.Text("")],
-                [sg.Text("")],
+                [
+                    sg.Text((9 * " ") + "Choose browser: "),
+                    sg.Combo(
+                        supported_browsers,
+                        default_value="system_default",
+                        # default_values="system_default",
+                        # select_mode="LISTBOX_SELECT_MODE_SINGLE",
+                        size=(20, 1),
+                        pad=(1, 1),
+                        readonly=True,
+                        key="-SelectedBrowser-",
+                    ),
+                ],
                 [sg.Text("")],
                 [sg.Button("Rustle Up Some Links", key="-DoIt-"), sg.Button("Quit"),],
             ]
@@ -99,22 +119,18 @@ while True:
         break
     elif event == "-DoIt-":
         thumbsize = values["-ThumbSizeNum-"]
-        if values["-Pixels-"]:
-            thumbsize += "px"
-        else:
+        if values["-PercentWidth-"]:
             thumbsize += "%"
-        proc_id = "slr_" + str(int(random.random() * 1000000000000))
-        d = multiprocessing.Process(
-            name=proc_id,
-            target=do_it(
-                values["-URLMask-"],
-                targetfile="rustled.html",
-                thumbsize=thumbsize,
-                hide_missing=values["-HideBorkedImages-"],
-            ),
+        else:
+            thumbsize += "px"
+        do_it(
+            values["-URLMask-"],
+            targetfile="rustled.html",
+            selected_browser=values["-SelectedBrowser-"],
+            thumbsize=thumbsize,
+            hide_missing=values["-HideBorkedImages-"],
         )
-        d.daemon = True
-        d.start()
+
     elif event == "-Clear URL mask-":
         window["-URLMask-"].update("")
     else:
