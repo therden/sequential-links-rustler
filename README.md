@@ -84,9 +84,9 @@ It isn't required (of course), but if you find this project useful and are so mo
 
 <a href="https://www.buymeacoffee.com/tomherden" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" alt="Buy Me A Coffee" width="217px" ></a>
 
-__Buy Me a Coffee__ is a great way to publicly support creators.  
+__Buy Me a Coffee__ is a _terrific_ way to support creators.  
 
-It's quick, easy, and (unless you choose otherwise) your contribution is recorded and made visible so you'll get credit for it.
+It's quick, easy, and (unless you choose otherwise) public -- by default, your contribution will be recorded and made visible at [my page on the __Buy Me a Coffee__ site](https://www.buymeacoffee.com/tomherden).
 
 Credits
 -------
