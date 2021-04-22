@@ -1,12 +1,60 @@
-# GitHub Page(s) for __Sequential Links Rustler__
+# __Sequential Links Rustler__
 
-This file is saved in the repo's `\docs` subdirectory, which is the source for the project's `Github Pages`.
+This file is saved in the `\docs` subdirectory of [the Sequential Links Rustler repository on GitHub](https://github.com/therden/sequential-links-rustler).
 
-Subirectories and other files saved under `\docs` are used in both README.md and in this file to illustrate how __Sequential Links Rustler__ works.
+Subdirectories and files have been saved within `\docs` to demonstrate __Sequential Links Rustler__ in action.
 
+Advanced sequence definition features
+-------------------------------------
+
+    - ###### zero padding of sequence values
+
+        When a website's numeric values include leading zeros, just include those in your sequence definition.  Examples:
+
+        | sequence_definition | produces sequence       |
+        | ------------------- | ----------------------- |
+        | {01-20;5}           | 01, 06, 11, 16          |
+        | {020-001; 4}        | 020, 016, 012, 008, 004 |
+
+
+    - ###### declining values within a sequence
+
+        Within the sequence definition, make *Start* the larger and *Stop* the smaller value.
+
+        For example:  changing the sequence definition in the above example to `{20-0}` will generate the same page, but the images will display in reverse order.
+
+    - ###### custom intervals between values
+
+        Between the *Stop* value and the closing curly bracket, insert a semi-colon and an integer representing the distance between consecutive values.
+
+        | sequence definition | set of values produced |
+        | ------------------- | ---------------------- |
+        | {0-9;2}             | 0, 2, 4, 6, 8          |
+        | {0-9;3}             | 0, 3, 6, 9             |
+        | {9-0;2}             | 9, 7, 5, 3, 1          |
+        | {9-0;3}             | 9, 6, 3, 0             |
+
+    - ###### including multiple sequence definitions within a single URL mask
+
+        For example: given the (partial), 3-level URL_mask
+        `foo{1-2}/bar{11-12}/pic{0-2}.jpg`
+        __Sequential Links Rustler__ will produce the following (partial) link sequence
+
+        foo1/bar11/pic0.jpeg<br>
+        foo1/bar11/pic1.jpeg<br>
+        foo1/bar11/pic2.jpeg<br>
+        foo1/bar12/pic0.jpeg<br>
+        foo1/bar12/pic1.jpeg<br>
+        foo1/bar12/pic2.jpeg<br>
+        foo2/bar11/pic0.jpeg<br>
+        foo2/bar11/pic1.jpeg<br>
+        foo2/bar11/pic2.jpeg<br>
+        foo2/bar12/pic0.jpeg<br>
+        foo2/bar12/pic1.jpeg<br>
+        foo2/bar12/pic2.jpeg<br>
 
 More example URL masks
-----
+----------------------
 Sequential links with values declining by 1<br>
 <input type="text" size="52ch" value="https://therden.github.io/sequential-links-rustler/png_numbers/{5-0}.png" id="Ex1">
 <button onclick="copyEx1()">Copy</button>
