@@ -68,15 +68,16 @@ layout = [
                         thumbsize_percentages,
                         initial_value="13",
                         size=(4, 4),
-                        key="-ThumbSizeNum-",
+                        key="-ThumbSize-",
                     ),
-                    sg.Radio(
-                        "% window width",
-                        default=True,
-                        group_id="-ThumbSizeUnits-",
-                        key="-PercentWidth-",
-                    ),
-                    sg.Radio("# pixels", group_id="-ThumbSizeUnits-", key="-Pixels-",),
+                    sg.Text("(% of browser window width)"),
+                    # sg.Radio(
+                    #     "% window width",
+                    #     default=True,
+                    #     group_id="-ThumbSizeUnits-",
+                    #     key="-PercentWidth-",
+                    # ),
+                    # sg.Radio("# pixels", group_id="-ThumbSizeUnits-", key="-Pixels-",),
                 ],
                 [
                     sg.Text(24 * " "),
@@ -118,16 +119,16 @@ while True:
     if event == sg.WINDOW_CLOSED or event == "Quit":
         break
     elif event == "-DoIt-":
-        thumbsize = values["-ThumbSizeNum-"]
-        if values["-PercentWidth-"]:
-            thumbsize += "%"
-        else:
-            thumbsize += "px"
+        # thumbsize = values["-ThumbSize-"] + "%"
+        # if values["-PercentWidth-"]:
+        #     thumbsize += "%"
+        # else:
+        #     thumbsize += "px"
         do_it(
             values["-URLMask-"],
             targetfile="rustled.html",
             selected_browser=values["-SelectedBrowser-"],
-            thumbsize=thumbsize,
+            thumbsize=values["-ThumbSize-"] + "%",
             hide_missing=values["-HideBorkedImages-"],
         )
 

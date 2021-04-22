@@ -26,10 +26,10 @@ Getting Started
 2.  Change to the directory containing these files
 3.  Run `python slr.py` or `python3 slr.py`
 4.  In the resulting GUI dialog
-    - fill in the URL mask -- see examples below and [here](https://therden.github.io/sequential-links-rustler),
-    - change options (if desired),
-    - click _Rustle Up Some Links_, and then
-    - sit back and wait (not long!) for your new web page to load.
+    - Fill in the URL mask -- see examples below and [here](https://therden.github.io/sequential-links-rustler),
+    - Change options (if desired),
+    - Click _Rustle Up Some Links_, and then
+    - Sit back and wait (not long!) for your new web page to load.
 
 <figure>
 <img width="90%" align="center" src="assets/SLR_screenshot.png">
@@ -55,7 +55,7 @@ the sequence definition is `{0-20}`. From this URL mask, __Sequential Links Rust
 
 Special features for image links
 --------------------------------
-- __Specify the size of thumbnail images as % of browser window or in pixels__
+- __Specify the size of thumbnail images as % of browser window__
 
 - __Choose whether to hide or display links to inaccessible image files__
 <!-- - #### Specify a separate URL mask for thumbnail images from full-size images -->
