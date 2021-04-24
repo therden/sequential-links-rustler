@@ -148,7 +148,10 @@ def get_HTML_file(URL_mask, targetfile=None, thumbsize="16%", hide_missing=False
         )
         display_imgs_script = textwrap.dedent(display_imgs_script)
     elif links_are_images:
-        style = f"<style>img {width: {thumbsize}; padding: 5x; position: relative; visibility: visible; display: inline}</style>"
+        style = (
+            "<style>img {width: %s; padding: 5x; position: relative; visibility: visible; display: inline}</style>"
+            % thumbsize
+        )
         display_imgs_script = ""
     else:
         style = ""
