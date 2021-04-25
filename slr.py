@@ -1,14 +1,19 @@
-import multiprocessing, random
+import multiprocessing, platform, random
 
 import PySimpleGUI as sg
 
 from main import rustle_up_some_links as do_it
 from lookup import supported_browsers
 
-thumbsize_percentages = [str(each) for each in range(1, 101)]
 
 # Define the window's contents
 window_title = "Sequential Links Rustler"
+thumbsize_percentages = [str(each) for each in range(1, 101)]
+icon_file = {
+    "linux": "assets/logo.png",
+    "windows": "assets/rustler.ico",
+    "darwin": "assets/logo.png",  # I _think_ this will work
+}[platform.system().lower()]
 
 logo_image = sg.Image(
     filename="assets/logo.png",
@@ -109,7 +114,7 @@ layout = [
 ]
 
 # Create the window
-window = sg.Window(window_title, layout)
+window = sg.Window(window_title, layout, icon=icon_file)
 
 # Display and interact with the Window using an Event Loop
 while True:
