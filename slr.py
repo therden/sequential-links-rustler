@@ -29,6 +29,22 @@ logo_image = sg.Image(
     enable_events=False,
     metadata=None,
 )
+option_elements = [
+    "-Element001-",
+    "-Element002-",
+    "-Element003-",
+    "-Element004-",
+    "-Element005-",
+    "-Element006-",
+    "-Element007-",
+    "-Element008-",
+    "-ThumbSize-",
+    "-HideBorkedImages-",
+    "-FilePath-",
+    "-FileName-",
+    "-DeleteFile-",
+    "-SelectedBrowser-",
+]
 thumbsize_percentages = [str(each) for each in range(1, 101)]
 window_title = "Sequential Links Rustler"
 
@@ -51,54 +67,72 @@ layout = [
                     sg.Button("Clear", size=(None, 3), key="-Clear URL mask-"),
                 ],
                 [
-                    sg.Text((10 * " ") + "Image Options   " + "Image thumbnail size:"),
-                    sg.Spin(
-                        thumbsize_percentages,
-                        initial_value="13",
-                        size=(4, 4),
-                        key="-ThumbSize-",
+                    sg.pin(
+                        sg.Text(
+                            (10 * " ") + "Image Options   " + "Image thumbnail size:",
+                            key="-Element001-",
+                        )
                     ),
-                    sg.Text("(% of browser window width)"),
+                    sg.pin(
+                        sg.Spin(
+                            thumbsize_percentages,
+                            initial_value="13",
+                            size=(4, 4),
+                            key="-ThumbSize-",
+                        )
+                    ),
+                    sg.pin(sg.Text("(% of browser window width)", key="-Element002-",)),
                 ],
                 [
-                    sg.Text(24 * " "),
-                    sg.Checkbox(
-                        " Hide empty links (images only)",
-                        default=True,
-                        key="-HideBorkedImages-",
-                    ),
-                ],
-                [
-                    sg.Text((11 * " ") + "File Options "),
-                    sg.Text("Path:"),
-                    sg.Input(key="-FilePath-", size=(33, 1), default_text=home_dir),
-                    sg.Text("Name:"),
-                    sg.Input(
-                        key="-FileName-", size=(17, 1), default_text="rustled.html"
-                    ),
-                ],
-                [
-                    sg.Text(24 * " "),
-                    sg.Checkbox(
-                        " Delete file on Exit", default=True, key="-DeleteFile-",
+                    sg.pin(sg.Text(24 * " ", key="-Element003-",)),
+                    sg.pin(
+                        sg.Checkbox(
+                            " Hide empty links (images only)",
+                            default=True,
+                            key="-HideBorkedImages-",
+                        )
                     ),
                 ],
                 [
-                    sg.Text((12 * " ") + "Use browser  "),
-                    sg.Combo(
-                        supported_browsers,
-                        default_value="system_default",
-                        size=(20, 1),
-                        pad=(1, 1),
-                        readonly=True,
-                        key="-SelectedBrowser-",
+                    sg.pin(sg.Text((11 * " ") + "File Options ", key="-Element004-",)),
+                    sg.pin(sg.Text("Path:", key="-Element005-",)),
+                    sg.pin(
+                        sg.Input(key="-FilePath-", size=(33, 1), default_text=home_dir)
+                    ),
+                    sg.pin(sg.Text("Name:", key="-Element006-",)),
+                    sg.pin(
+                        sg.Input(
+                            key="-FileName-", size=(17, 1), default_text="rustled.html"
+                        )
+                    ),
+                ],
+                [
+                    sg.pin(sg.Text(24 * " ", key="-Element007-",)),
+                    sg.pin(
+                        sg.Checkbox(
+                            " Delete file on Exit", default=True, key="-DeleteFile-",
+                        )
+                    ),
+                ],
+                [
+                    sg.pin(sg.Text((12 * " ") + "Use browser  ", key="-Element008-",)),
+                    sg.pin(
+                        sg.Combo(
+                            supported_browsers,
+                            default_value="system_default",
+                            size=(20, 1),
+                            pad=(1, 1),
+                            readonly=True,
+                            key="-SelectedBrowser-",
+                        )
                     ),
                 ],
                 [
                     sg.Button("Rustle Up Them Links", size=(0, 3), key="-DoIt-",),
-                    sg.Text((67 * " ")),
                     # sg.Text((50 * " ")),
-                    # sg.Button("Show Options", size=(0, 3), key="-Options-"),
+                    sg.Text((24 * " ")),
+                    sg.Button("Show Options", size=(0, 3), key="-Options-"),
+                    sg.Text((24 * " ")),
                     sg.Button(" Exit ", size=(0, 3)),
                 ],
             ]
@@ -107,7 +141,19 @@ layout = [
 ]
 
 # Create the window
-window = sg.Window(window_title, layout, icon=icon_file)
+window = sg.Window(window_title, layout, icon=icon_file, finalize=True)
+
+
+def toggle_option_elements():
+    if window[option_elements[0]].visible:
+        set_visibility = False
+    else:
+        set_visibility = True
+    for element in option_elements:
+        window[element].update(visible=set_visibility)
+
+
+toggle_option_elements()
 
 # Display and interact with the Window using an Event Loop
 while True:
@@ -121,6 +167,7 @@ while True:
                 pass
         break
     elif event == "-Options-":
+        toggle_option_elements()
         if window["-Options-"].get_text() == "Show Options":
             window["-Options-"].update(text="Hide Options")
         else:
