@@ -12,6 +12,7 @@ will include the "stop" value.
 See the doc string for each function for more details.
 """
 import os, re, textwrap, threading, webbrowser
+from os.path import expanduser
 
 from lookup import supported_image_extensions
 
@@ -174,11 +175,12 @@ def get_HTML_file(URL_mask, targetfile=None, thumbsize="16%", hide_missing=False
 
     page_bottom = f"<br>\n<i>{credit}</i>\n{display_imgs_script}\n</BODY>\n</HTML>"
 
-    targetfile = "links.html" if targetfile == None else targetfile
+    if not targetfile:
+        targetfile = expanduser("~") + "/" + rustled.html
     f = open(targetfile, "w")
     f.write(page_top + list_of_link_elements + page_bottom)
     f.close()
-    targetfile = "file:///" + os.getcwd() + "/" + targetfile
+    targetfile = "file:///" + targetfile
     return targetfile
 
 
@@ -186,19 +188,6 @@ def are_links_images(URL_mask):
     URL_mask = URL_mask.strip().lower()
     _, ext = URL_mask[-6:].split(".")
     return ext in supported_image_extensions
-
-
-# def open_file_in_firefox(URL):
-#     """The name says it all."""
-#     webbrowser.register("firefox", None, webbrowser.GenericBrowser("firefox"))
-#     ff = webbrowser.get("firefox")
-#     ff.open_new_tab(URL)
-#
-#
-# def open_file_in_default_browser(URL):
-#     """The name says it all."""
-#     wb = webbrowser.get()
-#     wb.open_new_tab(URL)
 
 
 def open_file_in_selected_browser(URL, selected_browser=None):
@@ -222,8 +211,6 @@ def make_and_open_HTML_file_from_URL_mask(
     URL = get_HTML_file(
         URL_mask, targetfile=targetfile, thumbsize=thumbsize, hide_missing=hide_missing
     )
-    # open_file_in_default_browser(URL)
-    # open_file_in_selected_browser(URL, selected_browser=None)
     open_file_in_selected_browser(URL, selected_browser=selected_browser)
 
 
@@ -239,11 +226,11 @@ def test_URL_generation_from_masks():
     - incorporating multiple, separately defind series within a single URL_mask
     """
     test_masks = [
-        "http://www.example.com/gallery/pic{1-4}",
-        "http://www.example.com/gallery/pic{1-5;2}",
-        "http://www.example.com/gallery/pic{5-1;-2}",
-        "http://www.example.com/gallery/pic{01-05;1}",
-        "http://www.example.com/gallery/pic{005-000;-2}",
+        "http://www.example.com/gallery/pic{0-4}",
+        "http://www.example.com/gallery/pic{4-0}",
+        "http://www.example.com/gallery/pic{0-10;2}",
+        "http://www.example.com/gallery/pic{05-00}",
+        "http://www.example.com/gallery/pic{005-000}",
         "http://www.example.com/gallery{1-2;1}/set{03-06}/pic{007-010;2}",
     ]
     for URL_mask in test_masks:
@@ -254,6 +241,4 @@ def test_URL_generation_from_masks():
 
 
 if __name__ == "__main__":
-    # test_URL_generation_from_masks()
-    # open_file_in_selected_browser("rustled.html", selected_browser="firefox")
-    open_file_in_selected_browser("rustled.html", selected_browser="chromium-browser")
+    test_URL_generation_from_masks()
