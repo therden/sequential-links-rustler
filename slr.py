@@ -67,7 +67,7 @@ layout = [
                 # [sg.Text("Edit URL mask:"), sg.Input(key="-ThumbnailMask-")],
                 # [sg.Text("")],
                 [
-                    sg.Text((26 * " ") + "Image thumbnail size:"),
+                    sg.Text((10 * " ") + "Image Options:  " + "Image thumbnail size:"),
                     # sg.Input(size=(3, 1), default_text="13", key="-ThumbSizeNum-"),
                     sg.Spin(
                         thumbsize_percentages,
