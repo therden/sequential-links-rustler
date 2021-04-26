@@ -7,51 +7,64 @@ Subdirectories and files have been saved within `\docs` to demonstrate __Sequent
 Advanced sequence definition features
 -------------------------------------
 
-    - ###### zero padding of sequence values
+- ###### zero padding of sequence values
 
-        When a website's numeric values include leading zeros, just include those in your sequence definition.  Examples:
+    When a website's numeric values include leading zeros, just include those zeros in your sequence definition.
 
-        | sequence_definition | produces sequence       |
-        | ------------------- | ----------------------- |
-        | {01-20;5}           | 01, 06, 11, 16          |
-        | {020-001; 4}        | 020, 016, 012, 008, 004 |
+    | sequence_definition | produces sequence       |
+    | ------------------- | ----------------------- |
+    | {01-05}             | 01, 02, 03, 04, 05      |
+    | {000-004}           | 000, 001, 002, 003, 004 |
 
 
-    - ###### declining values within a sequence
+- ###### declining values within a sequence
 
-        Within the sequence definition, make *Start* the larger and *Stop* the smaller value.
+    Within the sequence definition, make *Start* the larger and *Stop* the smaller value.
 
-        For example:  changing the sequence definition in the above example to `{20-0}` will generate the same page, but the images will display in reverse order.
+    | sequence_definition | produces sequence |
+    | ------------------- | ------------------|
+    | {5-0}               | 5, 4, 3, 2, 1, 0  |
+    | {15-13}             | 15, 14, 13        |    
 
-    - ###### custom intervals between values
+- ###### custom intervals between values
 
-        Between the *Stop* value and the closing curly bracket, insert a semi-colon and an integer representing the distance between consecutive values.
+    Between the *Stop* value and the closing curly bracket, insert a semi-colon and an integer representing the distance between consecutive values.
 
-        | sequence definition | set of values produced |
-        | ------------------- | ---------------------- |
-        | {0-9;2}             | 0, 2, 4, 6, 8          |
-        | {0-9;3}             | 0, 3, 6, 9             |
-        | {9-0;2}             | 9, 7, 5, 3, 1          |
-        | {9-0;3}             | 9, 6, 3, 0             |
+    | sequence definition | set of values produced |
+    | ------------------- | ---------------------- |
+    | {0-9;2}             | 0, 2, 4, 6, 8          |
+    | {0-9;3}             | 0, 3, 6, 9             |
 
-    - ###### including multiple sequence definitions within a single URL mask
+    Custom intervals can be combined with declining values:
 
-        For example: given the (partial), 3-level URL_mask
-        `foo{1-2}/bar{11-12}/pic{0-2}.jpg`
-        __Sequential Links Rustler__ will produce the following (partial) link sequence
+    | sequence definition | set of values produced |
+    | ------------------- | ---------------------- |
+    | {9-0;2}             | 9, 7, 5, 3, 1          |
+    | {9-0;3}             | 9, 6, 3, 0             |
 
-        foo1/bar11/pic0.jpeg<br>
-        foo1/bar11/pic1.jpeg<br>
-        foo1/bar11/pic2.jpeg<br>
-        foo1/bar12/pic0.jpeg<br>
-        foo1/bar12/pic1.jpeg<br>
-        foo1/bar12/pic2.jpeg<br>
-        foo2/bar11/pic0.jpeg<br>
-        foo2/bar11/pic1.jpeg<br>
-        foo2/bar11/pic2.jpeg<br>
-        foo2/bar12/pic0.jpeg<br>
-        foo2/bar12/pic1.jpeg<br>
-        foo2/bar12/pic2.jpeg<br>
+- ###### including multiple sequence definitions within a single URL mask
+
+    Given the (partial) URL_mask
+    `foo{001-002}/bar{12-9;3}/pic{0-10;5}.jpg`
+    __Sequential Links Rustler__ will produce the following sequence of partial links.  (Note: blank lines added to make it easier to see the sequence patterns.)
+
+    foo001/bar12/pic0.jpeg<br>
+    foo001/bar12/pic5.jpeg<br>
+    foo001/bar12/pic10.jpeg<br>
+
+    foo001/bar9/pic0.jpeg<br>
+    foo001/bar9/pic5.jpeg<br>
+    foo001/bar9/pic10.jpeg<br>
+
+    foo002/bar12/pic0.jpeg<br>
+    foo002/bar12/pic5.jpeg<br>
+    foo002/bar12/pic10.jpeg<br>
+
+    foo002/bar9/pic0.jpeg<br>
+    foo002/bar9/pic5.jpeg<br>
+    foo002/bar9/pic10.jpeg<br>
+
+    __Note:  The above example combines zero-padded `foo` values, `bar` values which decline by 3, and `pic` values which ascend by 5.__
 
 More example URL masks
 ----------------------
