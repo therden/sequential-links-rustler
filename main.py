@@ -39,9 +39,9 @@ def extract_sequence_definitions(URL_mask):
     Supports one or more series with either increasing or decreasing values, negative
     or positive strides, and values which do or don't include leading zeros.
     """
-    # sequence_defs = re.findall(r"\{(.*?)\}", URL_mask)
     if not check_sequence_definitions(URL_mask):
         exit()
+    sequence_defs = re.findall(r"\{(.*?)\}", URL_mask)
 
     for each in range(URL_mask.count("{")):
         if ";" in sequence_defs[each]:
