@@ -1,13 +1,11 @@
-# __Sequential Links Rustler__
-
 This file is saved in the `\docs` subdirectory of [the Sequential Links Rustler repository on GitHub](https://github.com/therden/sequential-links-rustler).
 
-Subdirectories and files have been saved within `\docs` to demonstrate __Sequential Links Rustler__ in action.
+Other files have been saved within subdirectories of `\docs` to demonstrate __Sequential Links Rustler__ in action.
 
-Advanced sequence definition features
--------------------------------------
+Advanced sequence definitions
+-----------------------------
 
-- ###### zero padding of sequence values
+- #### zero padding of sequence values
 
     When a website's numeric values include leading zeros, just include those zeros in your sequence definition.
 
@@ -17,7 +15,7 @@ Advanced sequence definition features
     | {000-004}           | 000, 001, 002, 003, 004 |
 
 
-- ###### declining values within a sequence
+- #### declining values within a sequence
 
     Within the sequence definition, make *Start* the larger and *Stop* the smaller value.
 
@@ -26,7 +24,7 @@ Advanced sequence definition features
     | {5-0}               | 5, 4, 3, 2, 1, 0  |
     | {15-13}             | 15, 14, 13        |    
 
-- ###### custom intervals between values
+- #### custom intervals between values
 
     Between the *Stop* value and the closing curly bracket, insert a semi-colon and an integer representing the distance between consecutive values.
 
@@ -42,11 +40,10 @@ Advanced sequence definition features
     | {9-0;2}             | 9, 7, 5, 3, 1          |
     | {9-0;3}             | 9, 6, 3, 0             |
 
-- ###### including multiple sequence definitions within a single URL mask
+- #### including multiple sequence definitions within a single URL mask
 
-    Given the (partial) URL_mask
-    `foo{001-002}/bar{12-9;3}/pic{0-10;5}.jpg`
-    __Sequential Links Rustler__ will produce the following sequence of partial links.  (Note: blank lines added to make it easier to see the sequence patterns.)
+    Given the (partial) URL_mask, `foo{001-002}/bar{12-9;3}/pic{0-10;5}.jpg`
+    __Sequential Links Rustler__ would produce the following sequence of (partial) links. (Blank lines added to make it easier to see the sequence patterns.)
 
     foo001/bar12/pic0.jpeg<br>
     foo001/bar12/pic5.jpeg<br>
