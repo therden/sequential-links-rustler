@@ -17,15 +17,18 @@ from os.path import expanduser
 from lookup import supported_image_extensions
 
 
-def check_sequence_definitions(sequence_defs):
+def check_sequence_definitions(URL_mask):
+    result = False
+    sequence_defs = re.findall(r"\{(.*?)\}", URL_mask)
     if not sequence_defs:
-        raise Exception("No range definitions found")
-    for each in sequence_defs:
-        if not "-" in each:
-            raise Exception("Hyphen missing between Start and End values")
-        else:
-            return True
-    return False
+        print("No sequence definitions found")
+    else:
+        for each in sequence_defs:
+            if not "-" in each:
+                print("Sequence definition missing hyphen")
+            else:
+                result = True
+    return result
 
 
 def extract_sequence_definitions(URL_mask):
@@ -36,8 +39,8 @@ def extract_sequence_definitions(URL_mask):
     Supports one or more series with either increasing or decreasing values, negative
     or positive strides, and values which do or don't include leading zeros.
     """
-    sequence_defs = re.findall(r"\{(.*?)\}", URL_mask)
-    if not check_sequence_definitions(sequence_defs):
+    # sequence_defs = re.findall(r"\{(.*?)\}", URL_mask)
+    if not check_sequence_definitions(URL_mask):
         exit()
 
     for each in range(URL_mask.count("{")):

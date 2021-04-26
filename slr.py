@@ -29,22 +29,6 @@ logo_image = sg.Image(
     enable_events=False,
     metadata=None,
 )
-option_elements = [
-    "-Element001-",
-    "-Element002-",
-    "-Element003-",
-    "-Element004-",
-    "-Element005-",
-    "-Element006-",
-    "-Element007-",
-    "-Element008-",
-    "-ThumbSize-",
-    "-HideBorkedImages-",
-    "-FilePath-",
-    "-FileName-",
-    "-DeleteFile-",
-    "-SelectedBrowser-",
-]
 thumbsize_percentages = [str(each) for each in range(1, 101)]
 window_title = "Sequential Links Rustler"
 
@@ -87,14 +71,16 @@ layout = [
                     sg.pin(sg.Text(24 * " ", key="-Element003-",)),
                     sg.pin(
                         sg.Checkbox(
-                            " Hide empty links (images only)",
-                            default=True,
+                            " Hide broken image links",
+                            default=False,
                             key="-HideBorkedImages-",
                         )
                     ),
                 ],
                 [
-                    sg.pin(sg.Text((11 * " ") + "File Options ", key="-Element004-",)),
+                    sg.pin(
+                        sg.Text((6 * " ") + "HTML File Options ", key="-Element004-",)
+                    ),
                     sg.pin(sg.Text("Path:", key="-Element005-",)),
                     sg.pin(
                         sg.Input(key="-FilePath-", size=(33, 1), default_text=home_dir)
@@ -105,12 +91,15 @@ layout = [
                             key="-FileName-", size=(17, 1), default_text="rustled.html"
                         )
                     ),
+                    sg.pin(sg.Button("Reset", key="-HTML_Defaults-")),
                 ],
                 [
                     sg.pin(sg.Text(24 * " ", key="-Element007-",)),
                     sg.pin(
                         sg.Checkbox(
-                            " Delete file on Exit", default=True, key="-DeleteFile-",
+                            " Delete HTML file on Exit",
+                            default=True,
+                            key="-DeleteFile-",
                         )
                     ),
                 ],
@@ -145,6 +134,23 @@ window = sg.Window(window_title, layout, icon=icon_file, finalize=True)
 
 
 def toggle_option_elements():
+    option_elements = [
+        "-Element001-",
+        "-Element002-",
+        "-Element003-",
+        "-Element004-",
+        "-Element005-",
+        "-Element006-",
+        "-Element007-",
+        "-Element008-",
+        "-ThumbSize-",
+        "-HideBorkedImages-",
+        "-FilePath-",
+        "-FileName-",
+        "-HTML_Defaults-",
+        "-DeleteFile-",
+        "-SelectedBrowser-",
+    ]
     if window[option_elements[0]].visible:
         set_visibility = False
     else:
@@ -183,6 +189,9 @@ while True:
 
     elif event == "-Clear URL mask-":
         window["-URLMask-"].update("")
+    elif event == "-HTML_Defaults-":
+        window["-FilePath-"].update(home_dir)
+        window["-FileName-"].update("rustled.html")
     else:
         print(event, values)
 
