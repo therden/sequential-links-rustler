@@ -5,6 +5,7 @@ from platform import system
 
 import PySimpleGUI as sg
 
+from main import check_URL_mask
 from main import rustle_up_some_links as do_it
 from lookup import supported_browsers
 
@@ -179,14 +180,17 @@ while True:
         else:
             window["-Options-"].update(text="Show Options")
     elif event == "-DoIt-":
-        do_it(
-            values["-URLMask-"],
-            targetfile=values["-FilePath-"] + "/" + values["-FileName-"],
-            selected_browser=values["-SelectedBrowser-"],
-            thumbsize=values["-ThumbSize-"] + "%",
-            hide_missing=values["-HideBorkedImages-"],
-        )
-
+        check_result = check_URL_mask(values["-URLMask-"])
+        if check_result == "Okay":
+            do_it(
+                values["-URLMask-"],
+                targetfile=values["-FilePath-"] + "/" + values["-FileName-"],
+                selected_browser=values["-SelectedBrowser-"],
+                thumbsize=values["-ThumbSize-"] + "%",
+                hide_missing=values["-HideBorkedImages-"],
+            )
+        else:
+            sg.popup_ok(check_result)
     elif event == "-Clear URL mask-":
         window["-URLMask-"].update("")
     elif event == "-HTML_Defaults-":

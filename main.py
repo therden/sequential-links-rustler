@@ -3,32 +3,89 @@ Functions which, given a "URL-mask" that describes a set of links that feature a
 numeric progression, generates an HTML file containing those links and opens
 that file in a web browser.
 
-For instance, If example.com had a series of files pic01.jpg through pic09.jpg, the URL_mask
-describing that series would be "http://example.com/{01-09;1}.jpg"
+For instance, If example.com had a series of files pic01.jpg through pic09.jpg,
+the URL_mask describing that series would be "http://example.com/{01-09;1}.jpg"
 
-Note:  unlike Python's "range", the range definitions in clique's URL_mask are
-will include the "stop" value.
+Note:  unlike Python's built-in "range" function, the values produced by the
+range definitions in Sequential Link Rustler's URL_mask will _include_ the
+"stop" value.
 
 See the doc string for each function for more details.
 """
 import os, re, textwrap, threading, webbrowser
+from collections import Counter
 from os.path import expanduser
 
 from lookup import supported_image_extensions
 
 
-def check_sequence_definitions(URL_mask):
-    result = False
-    sequence_defs = re.findall(r"\{(.*?)\}", URL_mask)
-    if not sequence_defs:
-        print("No sequence definitions found")
+def check_URL_mask(URL_mask):
+    error_prefix = "URL mask error:\n"
+    if ":" in URL_mask:
+        URL_prefix, _ = URL_mask.split(":")
+        if URL_prefix.lower() not in ("file, http, https"):
+            return f"{error_prefix}{URL_prefix} not supported in URL mask."
     else:
-        for each in sequence_defs:
-            if not "-" in each:
-                print("Sequence definition missing hyphen")
-            else:
-                result = True
-    return result
+        return f"{error_prefix}URL mask must begin: file:, http:, or https:"
+    mask_char_counts = Counter(URL_mask)
+    left_b, right_b = mask_char_counts["{"], mask_char_counts["}"]
+    # test for no curly brackets
+    if left_b + right_b == 0:
+        return f"{error_prefix}No curly brackets found in URL Mask."
+    # test for curly bracket
+    elif left_b != right_b:
+        if left_b > right_b:
+            return "%s %s more '{' than '}'." % (error_prefix, left_b - right_b)
+        else:
+            return "%s %s more '}' than '{'." % (error_prefix, right_b - left_b)
+    else:
+        # test for any non-empty pair of curly brackets
+        sequence_defs = re.findall(r"\{(.*?)\}", URL_mask)
+        if len(sequence_defs[0]) == 0:
+            return f"{error_prefix}No sequence definitions found within curly brackets."
+        else:  # test contents of each pair of brackets
+            allowed_chars = [str(x) for x in range(0, 10)] + ["-", ";"]
+            illegal_chars = []
+            for each_def in sequence_defs:
+                def_chars = Counter(each_def).keys()
+                for key in def_chars:
+                    if not key in allowed_chars:
+                        illegal_chars.append(key)
+                if illegal_chars:
+                    return f"{error_prefix}Illegal characters {illegal_chars} found in sequence definition."
+                # test for hyphen
+                if not "-" in each_def:
+                    return f"{error_prefix}Sequence definition missing hyphen."
+                # test whether an interval is defined
+                elif ";" in each_def:
+                    # test that interval is specified and is an integer
+                    range_def, stride = each_def.split(";")
+                    try:
+                        int(stride)
+                    except ValueError:
+                        return f"{error_prefix}Interval after ';' must be an integer."
+                    # test that Start and Stop values are integers
+                    start_val, stop_val = range_def.split("-")
+                    try:
+                        int(start_val)
+                    except ValueError:
+                        return f"{error_prefix}'Start' value must be an integer."
+                    try:
+                        int(stop_val)
+                    except ValueError:
+                        return f"{error_prefix}'Stop' value must be an integer."
+                else:
+                    # just test that Start and Stop values are integers
+                    start_val, stop_val = each_def.split("-")
+                    try:
+                        int(start_val)
+                    except ValueError:
+                        return f"{error_prefix}'Start' value must be an integer."
+                    try:
+                        int(stop_val)
+                    except ValueError:
+                        return f"{error_prefix}'Stop' value must be an integer."
+    return "Okay"
 
 
 def extract_sequence_definitions(URL_mask):
@@ -39,8 +96,6 @@ def extract_sequence_definitions(URL_mask):
     Supports one or more series with either increasing or decreasing values, negative
     or positive strides, and values which do or don't include leading zeros.
     """
-    if not check_sequence_definitions(URL_mask):
-        exit()
     sequence_defs = re.findall(r"\{(.*?)\}", URL_mask)
 
     for each in range(URL_mask.count("{")):
