@@ -89,7 +89,7 @@ function copyEx2() {
 
 
 ### Audio file countdown<br>
-<input type="text" size="52ch" value="https://therden.github.io/sequential-links-rustler/audio_numbers/{5-0}.html" id="Ex5">
+<input type="text" size="52ch" value="https://therden.github.io/sequential-links-rustler/audio_numbers/{5-0}.wav" id="Ex5">
 <button onclick="copyEx5()">Copy</button>
 <script>
 function copyEx5() {
