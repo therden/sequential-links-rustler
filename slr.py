@@ -15,39 +15,65 @@ icons = {
     "linux": "assets/logo.png",
     "windows": "assets/rustler.ico",
     "darwin": "assets/logo.png",  # I _think_ this will work
-    }
+}
 host_os = system().lower()
 icon_file = icons[host_os]
-rustler_logo = sg.Image(filename="assets/logo.png", size=(120, 136), key="logo", visible=True, enable_events=False)
+rustler_logo = sg.Image(
+    filename="assets/logo.png",
+    size=(120, 136),
+    key="logo",
+    visible=True,
+    enable_events=False,
+)
 window_title = "Sequential Links Rustler"
 
 # create fixed gui elements
-button_rustle = sg.Button( "Rustle\nUp\nSome\nLinks", size=(11, 6), font=("Any", 12), bind_return_key=True, key="-DoIt-" )
-button_options = sg.Button("Show Options", size=(16, 2), font=("Any", 12), key="-Options-")
+button_rustle = sg.Button(
+    "Rustle\nUp\nSome\nLinks",
+    size=(11, 6),
+    font=("Any", 12),
+    bind_return_key=True,
+    key="-DoIt-",
+)
+button_options = sg.Button(
+    "Show Options", size=(16, 2), font=("Any", 12), key="-Options-"
+)
 button_exit = sg.Button("Exit", size=(8, 2), font=("Any", 12))
-label_URLmask = sg.Text("Enter/edit URL mask:", size=(18, 1), text_color="black", justification="right")
+label_URLmask = sg.Text(
+    "Enter/edit URL mask:", size=(18, 1), text_color="black", justification="right"
+)
 button_clear = sg.Button("Clear", size=(None, 1), key="-Clear URL mask-")
 
 # create Options gui elements
 input_URLmask = sg.Multiline(key="-URLMask-", size=(64, 4), focus=True)
 button_reset = sg.Button("Reset", key="-HTML_Defaults-")
-label_image_options =sg.Text("\nImage Options ", size=(18, 4), text_color="black", justification="right")
+label_image_options = sg.Text(
+    "\nImage Options ", size=(18, 4), text_color="black", justification="right"
+)
 label_imagesize = sg.Text("Image thumbnail size:")
-label_file_options = sg.Text("HTML File Options ", size=(18, 1), text_color="black", justification="right",)
+label_file_options = sg.Text(
+    "HTML File Options ", size=(18, 1), text_color="black", justification="right",
+)
 spin_thumbsize = sg.Spin(
-                    [str(each) for each in range(1, 101)],
-                    initial_value="13",
-                    size=(4, 4),
-                    key="-ThumbSize-",
-                )
+    [str(each) for each in range(1, 101)],
+    initial_value="13",
+    size=(4, 4),
+    key="-ThumbSize-",
+)
 label_percent_width = sg.Text("(% of browser window width)")
-input_hideborked = sg.Checkbox(" Hide broken image links", default=False, key="-HideBorkedImages-")
+input_hideborked = sg.Checkbox(
+    " Hide broken image links", default=False, key="-HideBorkedImages-"
+)
 label_filepath = sg.Text("Path:")
 input_filepath = sg.Input(key="-FilePath-", size=(33, 1), default_text=home_dir)
 label_filename = sg.Text("Name:")
 input_filename = sg.Input(key="-FileName-", size=(17, 1), default_text="rustled.html")
-input_delete = sg.Checkbox(" Delete HTML file on Exit", default=True, key="-DeleteFile-")
-label_browser = sg.Text("Choose browser ", size=(18, 2), text_color="black", justification="right")
+input_delete = sg.Checkbox(
+    " Delete HTML file on Exit", default=True, key="-DeleteFile-"
+)
+label_browser = sg.Text(
+    "Choose browser ", size=(18, 2), text_color="black", justification="right"
+)
 input_browser = sg.Combo(
     supported_browsers,
     default_value="system_default",
@@ -59,12 +85,7 @@ input_browser = sg.Combo(
 
 # create layout
 fixed_column_1 = sg.Column(
-    [
-        [rustler_logo],
-        [label_URLmask],
-        [button_clear],
-    ],
-    element_justification="right"
+    [[rustler_logo], [label_URLmask], [button_clear],], element_justification="right"
 )
 
 toggle_column_1 = sg.Column(
@@ -77,7 +98,7 @@ toggle_column_1 = sg.Column(
         [label_browser],
     ],
     element_justification="right",
-    key = "tc1"
+    key="tc1",
 )
 
 fixed_column_2 = sg.Column(
@@ -98,27 +119,29 @@ toggle_column_2 = sg.Column(
         [sg.Text(" ", font=("Any", 12))],
         [input_browser],
     ],
-    key = "tc2"
+    key="tc2",
 )
 
 column_a = sg.Column([[fixed_column_1], [toggle_column_1]])
 column_b = sg.Column([[sg.vbottom(fixed_column_2)], [toggle_column_2]])
 
-layout = [[sg.vtop(column_a), column_b]]
+layout = [[sg.vtop(column_a), sg.vtop(column_b)]]
 
 # Create the window
 window = sg.Window(window_title, layout, icon=icon_file, finalize=True)
+
 
 def toggle_option_elements():
     toggle_cols = ("tc1", "tc2")
     if window[toggle_cols[0]].visible:
         for each in toggle_cols:
-            window[each].update(visible=False)
             window[each].hide_row()
+            window[each].update(visible=False)
     else:
         for each in toggle_cols:
-            window[each].update(visible=True)
             window[each].unhide_row()
+            window[each].update(visible=True)
+
 
 toggle_option_elements()
 
