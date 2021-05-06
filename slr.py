@@ -27,7 +27,7 @@ rustler_logo = sg.Image(
 )
 window_title = "Sequential Links Rustler"
 
-# create fixed gui elements
+# create Fixed gui elements
 button_rustle = sg.Button(
     "Rustle\nUp\nSome\nLinks",
     size=(11, 6),
@@ -64,7 +64,7 @@ input_hideborked = sg.Checkbox(
 label_filepath = sg.Text("Path:")
 input_filepath = sg.Input(key="-FilePath-", size=(31, 1), default_text=home_dir)
 label_filename = sg.Text("Name:")
-input_filename = sg.Input(key="-FileName-", size=(13, 1), default_text="rustled.html")
+input_filename = sg.Input(key="-FileName-", size=(15, 1), default_text="rustled.html")
 input_delete = sg.Checkbox(
     " Delete HTML file on Exit", default=True, key="-DeleteFile-"
 )
@@ -83,9 +83,9 @@ input_browser = sg.Combo(
 # create layout
 fixed_column_1 = sg.Column(
     [
-        [sg.Text(" ", font=("Any", 4))],
+        [sg.Text(" ")],
         [rustler_logo],
-        [sg.Text(" ", font=("Any", 14))],
+        [sg.Text(" ")],
         [button_clear],
     ],
     element_justification="right",
@@ -93,9 +93,13 @@ fixed_column_1 = sg.Column(
 
 fixed_column_2 = sg.Column(
     [
-        [sg.Text(" ", font=("Any", 4))],
-        [button_rustle, sg.vbottom(button_options), sg.vbottom(button_exit)],
-        [sg.Text(" ", font=("Any", 4))],
+        [sg.Text(" ")],
+        [
+            button_rustle,
+            sg.vbottom(button_options),
+            sg.vbottom(button_exit)
+        ],
+        [sg.Text(" ")],
         [label_URLmask],
         [input_URLmask],
     ],
@@ -108,14 +112,8 @@ options_column = sg.Column(
             sg.Frame(
                 "Image Options",
                 [
-                    [
-                        sg.Column(
-                            [
-                                [label_imagesize, spin_thumbsize, label_percent_width],
-                                [input_hideborked],
-                            ]
-                        )
-                    ]
+                    [label_imagesize, spin_thumbsize, label_percent_width],
+                    [input_hideborked],
                 ],
                 title_color="black",
             )
@@ -125,19 +123,13 @@ options_column = sg.Column(
                 "HTML File Options",
                 [
                     [
-                        sg.Column(
-                            [
-                                [
-                                    label_filepath,
-                                    input_filepath,
-                                    label_filename,
-                                    input_filename,
-                                ],
-                                [sg.Text("", size=(4, 1)), button_reset],
-                                [input_delete],
-                            ],
-                        )
-                    ]
+                        label_filepath,
+                        input_filepath,
+                        label_filename,
+                        input_filename,
+                    ],
+                    [sg.Text("", size=(4, 1)), button_reset],
+                    [input_delete],
                 ],
                 title_color="black",
             )
@@ -145,7 +137,7 @@ options_column = sg.Column(
         [
             sg.Frame(
                 "Choose Browser",
-                [[sg.Column([[input_browser],])]],
+                [[input_browser]],
                 title_color="black",
             )
         ],
@@ -154,21 +146,20 @@ options_column = sg.Column(
 )
 
 column_a = sg.Column([[fixed_column_1]])
-column_b = sg.Column([[sg.vbottom(fixed_column_2)], [options_column]])
-
-layout = [[sg.vtop(column_a), sg.vtop(column_b)]]
+column_b = sg.Column(
+    [
+        [fixed_column_2],
+        [sg.pin(options_column, shrink=True, expand_x=True, expand_y=True)]
+    ]
+)
+layout = [[sg.vtop(column_a), column_b]]
 
 # Create the window
-window = sg.Window(window_title, layout, icon=icon_file, finalize=True)
+window = sg.Window(window_title, layout, font=("Any", 10), icon=icon_file, finalize=True)
 
 
 def toggle_option_elements():
-    if window["options"].visible:
-        window["options"].hide_row()
-        window["options"].update(visible=False)
-    else:
-        window["options"].unhide_row()
-        window["options"].update(visible=True)
+    window["options"].update(visible = not window["options"].visible)
 
 
 toggle_option_elements()
@@ -176,11 +167,14 @@ toggle_option_elements()
 while True:
     event, values = window.read()
     if event == sg.WINDOW_CLOSED or event == "Exit":
-        if values["-DeleteFile-"]:
-            try:
-                remove(values["-FilePath-"] + "/" + values["-FileName-"])
-            except Exception:
-                pass
+        try:
+            if values["-DeleteFile-"]:
+                try:
+                    remove(values["-FilePath-"] + "/" + values["-FileName-"])
+                except Exception:
+                    pass
+        except:
+            pass
         break
     elif event == "-Options-":
         toggle_option_elements()
