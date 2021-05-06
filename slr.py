@@ -40,16 +40,13 @@ button_options = sg.Button(
 )
 button_exit = sg.Button("Exit", size=(8, 2), font=("Any", 12))
 label_URLmask = sg.Text(
-    "Enter/edit URL mask:", size=(18, 1), text_color="black", justification="right"
+    " Enter or Edit URL mask below", text_color="black", font=("Any", 10)
 )
-button_clear = sg.Button("Clear", size=(None, 1), key="-Clear URL mask-")
+input_URLmask = sg.Multiline(key="-URLMask-", size=(62, 4), focus=True)
+button_clear = sg.Button("Clear URL mask", size=(None, 1), key="-Clear URL mask-")
 
 # create Options gui elements
-input_URLmask = sg.Multiline(key="-URLMask-", size=(64, 4), focus=True)
-button_reset = sg.Button("Reset", key="-HTML_Defaults-")
-label_image_options = sg.Text(
-    "\nImage Options ", size=(18, 4), text_color="black", justification="right"
-)
+button_reset = sg.Button("Restore default filepath and name", key="-HTML_Defaults-")
 label_imagesize = sg.Text("Image thumbnail size:")
 label_file_options = sg.Text(
     "HTML File Options ", size=(18, 1), text_color="black", justification="right",
@@ -65,9 +62,9 @@ input_hideborked = sg.Checkbox(
     " Hide broken image links", default=False, key="-HideBorkedImages-"
 )
 label_filepath = sg.Text("Path:")
-input_filepath = sg.Input(key="-FilePath-", size=(33, 1), default_text=home_dir)
+input_filepath = sg.Input(key="-FilePath-", size=(31, 1), default_text=home_dir)
 label_filename = sg.Text("Name:")
-input_filename = sg.Input(key="-FileName-", size=(17, 1), default_text="rustled.html")
+input_filename = sg.Input(key="-FileName-", size=(13, 1), default_text="rustled.html")
 input_delete = sg.Checkbox(
     " Delete HTML file on Exit", default=True, key="-DeleteFile-"
 )
@@ -85,45 +82,79 @@ input_browser = sg.Combo(
 
 # create layout
 fixed_column_1 = sg.Column(
-    [[rustler_logo], [label_URLmask], [button_clear],], element_justification="right"
-)
-
-toggle_column_1 = sg.Column(
     [
-        [label_image_options],
-        [sg.Text(" ", font=("Any", 7))],
-        [label_file_options],
-        [button_reset],
-        [sg.Text(" ", font=("Any", 6))],
-        [label_browser],
+        [sg.Text(" ", font=("Any", 4))],
+        [rustler_logo],
+        [sg.Text(" ", font=("Any", 14))],
+        [button_clear],
     ],
     element_justification="right",
-    key="tc1",
 )
 
 fixed_column_2 = sg.Column(
     [
+        [sg.Text(" ", font=("Any", 4))],
         [button_rustle, sg.vbottom(button_options), sg.vbottom(button_exit)],
+        [sg.Text(" ", font=("Any", 4))],
+        [label_URLmask],
         [input_URLmask],
-    ]
-)
-
-toggle_column_2 = sg.Column(
-    [
-        [sg.Text(" ", font=("Any", 13))],
-        [label_imagesize, spin_thumbsize, label_percent_width],
-        [input_hideborked],
-        [sg.Text(" ")],
-        [label_filepath, input_filepath, label_filename, input_filename],
-        [input_delete],
-        [sg.Text(" ", font=("Any", 12))],
-        [input_browser],
     ],
-    key="tc2",
 )
 
-column_a = sg.Column([[fixed_column_1], [toggle_column_1]])
-column_b = sg.Column([[sg.vbottom(fixed_column_2)], [toggle_column_2]])
+
+options_column = sg.Column(
+    [
+        [
+            sg.Frame(
+                "Image Options",
+                [
+                    [
+                        sg.Column(
+                            [
+                                [label_imagesize, spin_thumbsize, label_percent_width],
+                                [input_hideborked],
+                            ]
+                        )
+                    ]
+                ],
+                title_color="black",
+            )
+        ],
+        [
+            sg.Frame(
+                "HTML File Options",
+                [
+                    [
+                        sg.Column(
+                            [
+                                [
+                                    label_filepath,
+                                    input_filepath,
+                                    label_filename,
+                                    input_filename,
+                                ],
+                                [sg.Text("", size=(4, 1)), button_reset],
+                                [input_delete],
+                            ],
+                        )
+                    ]
+                ],
+                title_color="black",
+            )
+        ],
+        [
+            sg.Frame(
+                "Choose Browser",
+                [[sg.Column([[input_browser],])]],
+                title_color="black",
+            )
+        ],
+    ],
+    key="options",
+)
+
+column_a = sg.Column([[fixed_column_1]])
+column_b = sg.Column([[sg.vbottom(fixed_column_2)], [options_column]])
 
 layout = [[sg.vtop(column_a), sg.vtop(column_b)]]
 
@@ -132,15 +163,12 @@ window = sg.Window(window_title, layout, icon=icon_file, finalize=True)
 
 
 def toggle_option_elements():
-    toggle_cols = ("tc1", "tc2")
-    if window[toggle_cols[0]].visible:
-        for each in toggle_cols:
-            window[each].hide_row()
-            window[each].update(visible=False)
+    if window["options"].visible:
+        window["options"].hide_row()
+        window["options"].update(visible=False)
     else:
-        for each in toggle_cols:
-            window[each].unhide_row()
-            window[each].update(visible=True)
+        window["options"].unhide_row()
+        window["options"].update(visible=True)
 
 
 toggle_option_elements()
