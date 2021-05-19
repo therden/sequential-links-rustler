@@ -7,6 +7,7 @@ import PySimpleGUI as sg
 
 from main import check_URL_mask
 from main import rustle_up_some_links as do_it
+from main import convert_URL_to_mask
 from lookup import supported_browsers
 
 # set variables used by the gui
@@ -34,6 +35,7 @@ button_rustle = sg.Button(
     font=("Any", 12),
     bind_return_key=True,
     key="-DoIt-",
+    focus=True
 )
 button_options = sg.Button(
     "Show Options", size=(16, 2), font=("Any", 12), key="-Options-"
@@ -42,8 +44,9 @@ button_exit = sg.Button("Exit", size=(8, 2), font=("Any", 12))
 label_URLmask = sg.Text(
     " Enter or Edit URL mask below", text_color="black", font=("Any", 10)
 )
-input_URLmask = sg.Multiline(key="-URLMask-", size=(62, 4), focus=True)
-button_clear = sg.Button("Clear URL mask", size=(None, 1), key="-Clear URL mask-")
+input_URLmask = sg.Multiline(key="-URLMask-", size=(62, 4))
+button_automask = sg.Button("Convert URL", size=(14, 1), key="-Insert range defs-", pad=(0, 0))
+button_clear = sg.Button("Clear URL mask", size=(14, 1), key="-Clear URL mask-", pad=(0, 0))
 
 # create Options gui elements
 button_reset = sg.Button("Restore default filepath and name", key="-HTML_Defaults-")
@@ -86,6 +89,8 @@ fixed_column_1 = sg.Column(
         [sg.Text(" ")],
         [rustler_logo],
         [sg.Text(" ")],
+        # [sg.Text(" ")],
+        [button_automask],
         [button_clear],
     ],
     element_justification="right",
@@ -99,7 +104,7 @@ fixed_column_2 = sg.Column(
             sg.vbottom(button_options),
             sg.vbottom(button_exit)
         ],
-        [sg.Text(" ")],
+        # [sg.Text(" ")],
         [label_URLmask],
         [input_URLmask],
     ],
@@ -163,6 +168,7 @@ def toggle_option_elements():
 
 
 toggle_option_elements()
+window["-DoIt-"].set_focus()
 
 while True:
     event, values = window.read()
@@ -196,6 +202,9 @@ while True:
             sg.popup_ok(check_result)
     elif event == "-Clear URL mask-":
         window["-URLMask-"].update("")
+    elif event == "-Insert range defs-":
+        newmask = convert_URL_to_mask(values["-URLMask-"])
+        window["-URLMask-"].update(newmask)
     elif event == "-HTML_Defaults-":
         window["-FilePath-"].update(home_dir)
         window["-FileName-"].update("rustled.html")
