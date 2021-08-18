@@ -35,6 +35,7 @@ Getting Started
 <img width="90%" align="center" src="assets/SLR_screenshot.png">
 </figure>
 
+
 Basic Usage
 -----------
 __Sequential Links Rustler__ accepts a __"URL mask"__ and generates an HTML page with links to the specified resources, opening the resulting file in your chosen browser.
@@ -55,6 +56,12 @@ From this URL mask, __Sequential Links Rustler__ will produce and load an HTML p
 <img width="90%" align="center" src="assets/Links_screenshot.png">
 </figure>
 
+
+URL mask helper
+---------------
+__Sequential Links Rustler__ now has a *Convert URL* button that, when pressed, will evaluate a normal URL, replacing all numeric sequences with equivalent sequence definitions -- which you can then edit to customize the HTML file that will be generated.
+
+
 Options
 -------
 Several aspects of __Sequential Links Rustler__'s are configurable.  These can be viewed by clicking the _Show Options_ button (which will then display the text _Hide Options_.)
@@ -63,7 +70,7 @@ Several aspects of __Sequential Links Rustler__'s are configurable.  These can b
 <img width="90%" align="center" src="assets/SLR_Options_screenshot.png">
 </figure>
 
-Options for image links
+*Options for image links*
 --------------------------------
 - __Specify the size of thumbnail images as % of browser window width__
 
@@ -75,7 +82,7 @@ Options for image links
 
 <!-- - #### Specify a separate URL mask for thumbnail images from full-size images -->
 
-Other Options
+*Other Options*
 -------------
 - __Choose alternate location to save the generated HTML file__
 
@@ -93,6 +100,7 @@ Other Options
 
     Note: if you choose a browser that is not available on your system, no error message will be displayed -- the generated file just won't be opened.
 
+
 Advanced "sequence definition" features
 ---------------------------------------
 -  zero padding of sequence values
@@ -102,9 +110,11 @@ Advanced "sequence definition" features
 
 For detailed information about these options, and more example URL masks, see [the GitHub pages associated with this project](https://therden.github.io/sequential-links-rustler/).
 
+
 ToDo
 ----
 I track bugs and ideas for improvements and new features in [Issues](https://github.com/therden/sequential-links-rustler/issues) -- feel free to contribute your thoughts there.
+
 
 Speaking of contributions
 -------------------------
@@ -116,9 +126,10 @@ __Buy Me a Coffee__ is a _terrific_ way to support creators.
 
 It's quick, easy, and (unless you choose otherwise) public -- by default, your contribution will be recorded and made visible at [my page on the __Buy Me a Coffee__ site](https://www.buymeacoffee.com/tomherden).
 
+
 Credits
 -------
-Speaking of credit...
+And speaking of credits...
 
 My sincere thanks to
 
